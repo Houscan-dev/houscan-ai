@@ -1,0 +1,28 @@
+{
+  "announcement_date": "2023.06.30",
+  "online_application_period": {
+    "start": "2023.07.17",
+    "end": "2023.07.19"
+  },
+  "document_submission_period": {
+    "start": "2023.07.24",
+    "end": "2023.07.28"
+  },
+  "inspection_period": {
+    "start": null,
+    "end": "2023.11"
+  },
+  "winner_announcement": "2023.12.01 00:00",
+  "contract_period": {
+    "start": "2023.12.18",
+    "end": "2023.12.22"
+  },
+  "payment_period": {
+    "start": "2024.01.08",
+    "end": "2024.03.08"
+  },
+  "move_in_period": {
+    "start": "2024.01.08",
+    "end": "2024.03.08"
+  }
+}

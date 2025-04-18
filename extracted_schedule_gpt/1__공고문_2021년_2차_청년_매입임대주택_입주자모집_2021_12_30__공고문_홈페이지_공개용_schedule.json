@@ -1,0 +1,28 @@
+{
+  "announcement_date": "2021.12.30",
+  "online_application_period": {
+    "start": "2022.01.12",
+    "end": "2022.01.14"
+  },
+  "document_submission_period": {
+    "start": "2022.01.20",
+    "end": "2022.01.26"
+  },
+  "inspection_period": {
+    "start": null,
+    "end": "2022.05"
+  },
+  "winner_announcement": "2022.05.18 00:00",
+  "contract_period": {
+    "start": "2022.06.07",
+    "end": "2022.06.10"
+  },
+  "payment_period": {
+    "start": null,
+    "end": null
+  },
+  "move_in_period": {
+    "start": "2022.06.27",
+    "end": "2022.08.26"
+  }
+}
