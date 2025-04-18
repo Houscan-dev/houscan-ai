@@ -1,0 +1,18 @@
+{
+  "age_min": 19,
+  "age_max": 39,
+  "gender_restriction": null,
+  "marital_status": "미혼",
+  "university_status": "재학",
+  "recent_graduate": null,
+  "employment_status": null,
+  "job_seeking": null,
+  "household_type": null,
+  "parents_own_house": null,
+  "disability_in_family": null,
+  "application_count": null,
+  "total_asset_limit_won": 75000000,
+  "car_asset_limit_won": null,
+  "must_be_homeless": true,
+  "income_limit_percent": 100
+}

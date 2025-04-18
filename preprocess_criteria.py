@@ -91,11 +91,20 @@ def generate_gpt_response(context, max_tokens=1024):
 요구 항목:
 - "age_min": 최소 나이 (만 나이 기준, 정수)
 - "age_max": 최대 나이 (만 나이 기준, 정수)
-- "must_be_unmarried": 혼인 상태 (미혼이어야 하는지 여부, 불리언)
-- "income_limit_percent": 소득 기준 (전년도 도시근로자 월평균소득 대비 비율, 정수, 예: 100)
-- "total_asset_limit_won": 총자산 기준 (세대 기준, 원 단위, 정수)
-- "car_asset_limit_won": 자동차 기준 (세대 기준, 원 단위, 정수)
+- "gender_restriction": 성별 제한 (null: 제한 없음, "남성": 남성만, "여성": 여성만)
+- "marital_status": 혼인 상태 (null: 제한 없음, "미혼": 미혼만, "기혼": 기혼만)
+- "university_status": 대학 재학 상태 (null: 제한 없음, "재학": 재학 중만, "졸업": 졸업자만)
+- "recent_graduate": 최근 졸업자 여부 (null: 제한 없음, true: 최근 졸업자만)
+- "employment_status": 고용 상태 (null: 제한 없음, "재직": 재직자만, "미취업": 미취업자만)
+- "job_seeking": 구직 활동 여부 (null: 제한 없음, true: 구직 중만)
+- "household_type": 세대 유형 (null: 제한 없음, "일반": 일반 가구, "기초생활수급": 기초생활수급자, "한부모": 한부모 가구 등)
+- "parents_own_house": 부모 주택 보유 여부 (null: 제한 없음, false: 부모 주택 미보유만)
+- "disability_in_family": 가족 내 장애인 여부 (null: 제한 없음, true: 장애인 가구만)
+- "application_count": 이전 신청 횟수 제한 (null: 제한 없음, 정수: 최대 신청 횟수)
+- "total_asset_limit_won": 총자산 기준(총자산가액) (세대 기준, 원 단위, 정수)
+- "car_asset_limit_won": 자동차 기준(자동차가액) (세대 기준, 원 단위, 정수)
 - "must_be_homeless": 무주택 요건 (세대 기준, 불리언)
+- "income_limit_percent": 소득 기준 (전년도 도시근로자 월평균소득 대비 비율, 정수, 예: 100)
 
 [공고문 내용 시작]
 {context}
@@ -167,71 +176,76 @@ def extract_and_save_criteria_for_pdf(pdf_name, output_dir="extracted_criteria_g
     logging.info(f"--- Function extract_and_save_criteria_for_pdf entered for {pdf_name} ---")
 
     # 1. 의미 검색으로 관련 청크 가져오기
-    # search_query = "청년 대상 주택 입주 자격 상세 요건 (나이, 소득, 자산, 혼인 상태, 무주택 여부 포함)"
-    search_query = "입주 자격 요건 및 소득 자산 기준" # 더 간결한 쿼리
-    n_results_to_fetch = 20 # 상위 10개 청크 가져오기 (필요시 조정)
+    search_queries = [
+        "청년 주택 입주 자격 요건",
+        "소득 기준 및 자산 기준",
+        "무주택 세대구성원 요건",
+        "나이 제한 및 혼인 상태"
+    ]
+    n_results_to_fetch = 5  # 각 쿼리당 5개 결과만 가져오기
 
-    logging.info(f"Performing semantic search for '{search_query}' within {pdf_name}...")
-    context_text = "" # 컨텍스트 초기화
+    logging.info(f"Performing semantic search for multiple queries within {pdf_name}...")
+    context_text = ""  # 컨텍스트 초기화
+    
     try:
-        query_embedding = get_embedding(search_query)
-        if query_embedding is None:
-             raise ValueError("Failed to generate query embedding.")
+        # 각 쿼리에 대해 검색 수행
+        for query in search_queries:
+            logging.info(f"Processing query: '{query}'")
+            query_embedding = get_embedding(query)
+            if query_embedding is None:
+                logging.error(f"Failed to generate embedding for query: '{query}'")
+                continue
 
-        # collection.query 사용 (의미 기반 검색)
-        results = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=n_results_to_fetch,
-            where={"filename": pdf_name}, # !!! 중요: 특정 파일 필터링 !!!
-            include=["documents", "metadatas"] # 정렬 및 디버깅 위해 메타데이터 포함
-        )
+            # collection.query 사용 (의미 기반 검색)
+            results = collection.query(
+                query_embeddings=[query_embedding],
+                n_results=n_results_to_fetch,
+                where={"filename": pdf_name},
+                include=["documents", "metadatas"]
+            )
 
-        # 결과 확인 및 컨텍스트 구성
-        if not results or not results.get('documents') or not results['documents'][0]:
-            logging.warning(f"Semantic search returned no relevant chunks for '{search_query}' in {pdf_name}.")
-            return False # 처리 실패
+            if not results or not results.get('documents') or not results['documents'][0]:
+                logging.warning(f"No results for query: '{query}'")
+                continue
 
-        retrieved_docs = results['documents'][0]
-        retrieved_metas = results['metadatas'][0]
+            # 결과 처리
+            retrieved_docs = results['documents'][0]
+            retrieved_metas = results['metadatas'][0]
 
-        # 검색된 청크들을 원래 문서 순서(chunk_index)대로 정렬
-        chunks_with_meta = list(zip(retrieved_docs, retrieved_metas))
-        chunks_with_meta.sort(key=lambda x: x[1].get('chunk_index', float('inf'))) # chunk_index 없으면 맨 뒤로
+            # 청크 정렬 및 정리
+            chunks_with_meta = list(zip(retrieved_docs, retrieved_metas))
+            chunks_with_meta.sort(key=lambda x: x[1].get('chunk_index', float('inf')))
 
-        # 정렬된 청크들의 내용 결합 (HTML 태그 제거 포함)
-        retrieved_docs_sorted_cleaned = []
-        for doc, meta in chunks_with_meta:
-            content_cleaned = re.sub(r'<h\d>.*?</h\d>\n?', '', doc, 1).strip()
-            retrieved_docs_sorted_cleaned.append(content_cleaned)
+            # HTML 태그 제거 및 내용 정리
+            for doc, meta in chunks_with_meta:
+                content_cleaned = re.sub(r'<h\d>.*?</h\d>\n?', '', doc, 1).strip()
+                if content_cleaned and content_cleaned not in context_text:
+                    context_text += content_cleaned + "\n\n"
 
-        context_text = "\n\n".join(retrieved_docs_sorted_cleaned)
-        logging.info(f"Retrieved and combined {len(retrieved_docs_sorted_cleaned)} chunks via semantic search (sorted by index).")
-        logging.info(f"Combined context text length: {len(context_text)} characters.")
-        # logging.debug(f"Context sent to LLM:\n{context_text[:1000]}...") # 필요시 LLM 입력 컨텍스트 확인
+        if not context_text:
+            logging.warning(f"No relevant content found for any query in {pdf_name}")
+            return False
+
+        logging.info(f"Total combined context length: {len(context_text)} characters")
+        logging.debug(f"First 1000 characters of context:\n{context_text[:1000]}")
 
     except Exception as e:
-        logging.error(f"Error during semantic search or context preparation for {pdf_name}: {e}", exc_info=True)
-        return False
-
-    # context_text가 비어있는 경우
-    if not context_text:
-        logging.warning(f"Skipping {pdf_name} due to empty context after semantic search.")
+        logging.error(f"Error during semantic search for {pdf_name}: {e}", exc_info=True)
         return False
 
     # 2. GPT API 호출 및 파싱
     gpt_response_content = generate_gpt_response(context_text)
     if not gpt_response_content:
-         logging.error(f"Failed to get response from GPT API for {pdf_name}.")
-         return False
+        logging.error(f"Failed to get response from GPT API for {pdf_name}")
+        return False
 
     extracted_criteria = parse_gpt_json_output(gpt_response_content)
     if not extracted_criteria:
-        logging.error(f"Failed to parse criteria using GPT API for {pdf_name}.")
+        logging.error(f"Failed to parse criteria using GPT API for {pdf_name}")
         return False
 
     # 3. 파일로 저장
     try:
-        logging.info(f"Attempting to save extracted criteria to file for {pdf_name}...")
         os.makedirs(output_dir, exist_ok=True)
         base_filename = os.path.splitext(pdf_name)[0]
         safe_base_filename = re.sub(r'[^\w\-]+', '_', base_filename)
@@ -247,37 +261,38 @@ def extract_and_save_criteria_for_pdf(pdf_name, output_dir="extracted_criteria_g
         logging.error(f"Error saving criteria JSON for {pdf_name}: {e}", exc_info=True)
         return False
 
-# --- 메인 실행 부분 (단일 파일 테스트용 + 디버깅 로그 추가) ---
+# --- 메인 실행 부분 (모든 공고 처리) ---
 if __name__ == "__main__":
-    logging.info("Starting script to extract eligibility criteria for a single PDF using GPT API...")
+    logging.info("Starting script to extract eligibility criteria for all PDFs using GPT API...")
 
-    # --- 테스트할 PDF 파일명 지정 ---
-    # !!! 중요: 여기에 ChromaDB에 저장된 정확한 PDF 파일명을 입력하세요 !!!
-    pdf_to_test = "[마을과집]SH특화형 매입임대주택(청년) 입주자 모집 공고문_20250307.pdf"
-    # ---------------------------------
-
-    logging.info(f"PDF filename to test: {pdf_to_test}")
-    if not pdf_to_test:
-        logging.error("No PDF filename specified for testing. Please set the 'pdf_to_test' variable.")
+    # ChromaDB에서 모든 고유한 파일명 가져오기
+    try:
+        results = collection.get()
+        unique_filenames = set(meta['filename'] for meta in results['metadatas'])
+        logging.info(f"Found {len(unique_filenames)} unique PDF files in ChromaDB")
+    except Exception as e:
+        logging.error(f"Error retrieving filenames from ChromaDB: {e}", exc_info=True)
         exit()
-    logging.info("Setup complete. Proceeding to call extraction function...")
 
     total_start_time = time.time()
+    success_count = 0
+    fail_count = 0
 
-    success = False
-    try:
-        logging.info(f"Calling extract_and_save_criteria_for_pdf for '{pdf_to_test}'...")
-        success = extract_and_save_criteria_for_pdf(pdf_to_test, output_dir="./extracted_criteria_gpt_test")
-    except Exception as e:
-        logging.error(f"An unexpected error occurred during the main processing block for {pdf_to_test}: {e}", exc_info=True)
+    # 각 PDF 파일에 대해 처리
+    for pdf_name in unique_filenames:
+        logging.info(f"Processing PDF: {pdf_name}")
+        try:
+            success = extract_and_save_criteria_for_pdf(pdf_name, output_dir="./extracted_criteria_gpt")
+            if success:
+                success_count += 1
+            else:
+                fail_count += 1
+        except Exception as e:
+            logging.error(f"An unexpected error occurred during processing {pdf_name}: {e}", exc_info=True)
+            fail_count += 1
 
     total_end_time = time.time()
     logging.info("=" * 50)
-    logging.info(f"Finished processing attempt for {pdf_to_test}. Success status: {success}")
-    if success:
-        logging.info(f"Successfully processed {pdf_to_test}.")
-        logging.info(f"Extracted criteria saved in './extracted_criteria_gpt_test' directory.")
-    else:
-        logging.error(f"Failed to process {pdf_to_test}.")
-    logging.info(f"Total execution time: {total_end_time - total_start_time:.2f} seconds.")
+    logging.info(f"Finished processing all PDFs. Success: {success_count}, Failed: {fail_count}")
+    logging.info(f"Total execution time: {total_end_time - total_start_time:.2f} seconds")
     logging.info("=" * 50)
