@@ -177,39 +177,376 @@ def save_pdf_content(pdf_name, output_format="txt", section_title=None):
     
     print(f"✅ 내용이 저장되었습니다: {filepath}")
 
+def check_eligibility(user_info):
+    """사용자 지원 자격 검증"""
+    # 검색할 키워드 구성
+    search_queries = [
+        "지원자격",
+        "신청자격",
+        "자격요건",
+        "소득기준",
+        "자산기준",
+        "연령제한",
+        "나이제한",
+        "자동차보유",
+        "차량보유",
+        "재학생",
+        "졸업생",
+        "취업여부",
+        "수급자",
+        "장애인"
+    ]
+    
+    # 모든 PDF 파일 목록 가져오기
+    pdf_files = get_pdf_list()
+    eligibility_results = []
+    
+    for pdf_name in pdf_files:
+        pdf_result = {
+            "pdf_name": pdf_name,
+            "eligible": True,
+            "requirements": [],
+            "matched_conditions": [],
+            "unmet_conditions": []
+        }
+        
+        # 각 검색 키워드에 대해 해당 PDF의 자격 조건 검색
+        for query in search_queries:
+            results = search_chunks(query, top_k=3, pdf_name=pdf_name)
+            if results and results['documents']:
+                for doc in results['documents'][0]:
+                    requirement = analyze_requirement(doc, user_info)
+                    if requirement:
+                        pdf_result["requirements"].extend(requirement)
+        
+        # 자격 요건 분석 결과 정리
+        pdf_result = analyze_eligibility(pdf_result, user_info)
+        eligibility_results.append(pdf_result)
+    
+    return eligibility_results
+
+def analyze_requirement(text, user_info):
+    """텍스트에서 자격 요건 추출 및 분석"""
+    requirements = []
+    
+    # 나이/연령 제한 확인
+    birth_year = int(user_info["birth_date"][:4])
+    current_year = datetime.datetime.now().year
+    age = current_year - birth_year + 1  # 한국 나이
+    
+    age_patterns = [
+        r'(\d+)세\s*(?:미만|이하|이상|초과)',
+        r'만\s*(\d+)세\s*(?:미만|이하|이상|초과)',
+        r'(\d+)년생\s*(?:이후|이전)'
+    ]
+    
+    for pattern in age_patterns:
+        matches = re.finditer(pattern, text)
+        for match in matches:
+            requirements.append({
+                "type": "age",
+                "text": match.group(0),
+                "value": int(match.group(1))
+            })
+    
+    # 소득 기준 확인
+    income_patterns = [
+        r'소득\s*(\d+)%\s*이하',
+        r'평균\s*소득\s*(\d+)%\s*이하',
+        r'소득기준\s*(\d+)%\s*이하'
+    ]
+    
+    for pattern in income_patterns:
+        matches = re.finditer(pattern, text)
+        for match in matches:
+            requirements.append({
+                "type": "income",
+                "text": match.group(0),
+                "value": int(match.group(1))
+            })
+    
+    # 자산 기준 확인
+    asset_patterns = [
+        r'총자산\s*(\d+)(?:만원|억원)',
+        r'자산\s*(\d+)(?:만원|억원)'
+    ]
+    
+    for pattern in asset_patterns:
+        matches = re.finditer(pattern, text)
+        for match in matches:
+            requirements.append({
+                "type": "assets",
+                "text": match.group(0),
+                "value": convert_to_won(match.group(1), match.group(0))
+            })
+    
+    # 차량 기준 확인
+    if "차량" in text or "자동차" in text:
+        requirements.append({
+            "type": "car",
+            "text": text,
+            "value": None
+        })
+    
+    # 수급자 관련 확인
+    if "수급자" in text:
+        requirements.append({
+            "type": "welfare",
+            "text": text,
+            "value": None
+        })
+    
+    return requirements
+
+def analyze_eligibility(pdf_result, user_info):
+    """자격 요건과 사용자 정보 비교 분석"""
+    for req in pdf_result["requirements"]:
+        if req["type"] == "age":
+            birth_year = int(user_info["birth_date"][:4])
+            current_year = datetime.datetime.now().year
+            age = current_year - birth_year + 1
+            
+            if "이하" in req["text"] and age > req["value"]:
+                pdf_result["eligible"] = False
+                pdf_result["unmet_conditions"].append(f"나이 제한: {req['text']}")
+            elif "이상" in req["text"] and age < req["value"]:
+                pdf_result["eligible"] = False
+                pdf_result["unmet_conditions"].append(f"나이 제한: {req['text']}")
+            else:
+                pdf_result["matched_conditions"].append(f"나이 조건 충족: {age}세")
+        
+        elif req["type"] == "income":
+            user_income = int(user_info["income_range"].replace("% 이하", ""))
+            if user_income > req["value"]:
+                pdf_result["eligible"] = False
+                pdf_result["unmet_conditions"].append(f"소득 기준: {req['text']}")
+            else:
+                pdf_result["matched_conditions"].append(f"소득 기준 충족: {user_income}%")
+        
+        elif req["type"] == "assets":
+            if int(user_info["total_assets"]) > req["value"]:
+                pdf_result["eligible"] = False
+                pdf_result["unmet_conditions"].append(f"자산 기준: {req['text']}")
+            else:
+                pdf_result["matched_conditions"].append("자산 기준 충족")
+        
+        elif req["type"] == "car":
+            if int(user_info["car_value"]) > 0:
+                pdf_result["eligible"] = False
+                pdf_result["unmet_conditions"].append("차량 보유 제한")
+            else:
+                pdf_result["matched_conditions"].append("차량 기준 충족")
+    
+    return pdf_result
+
+def convert_to_won(value, unit):
+    """금액 단위 변환"""
+    value = int(value)
+    if "억원" in unit:
+        return value * 100000000
+    elif "만원" in unit:
+        return value * 10000
+    return value
+
+def get_eligible_programs(user_info):
+    """사용자가 지원 가능한 프로그램 목록 조회"""
+    results = check_eligibility(user_info)
+    
+    eligible_programs = []
+    ineligible_programs = []
+    
+    for result in results:
+        program_info = {
+            "name": result["pdf_name"],
+            "matched_conditions": result["matched_conditions"],
+            "unmet_conditions": result["unmet_conditions"]
+        }
+        
+        if result["eligible"]:
+            eligible_programs.append(program_info)
+        else:
+            ineligible_programs.append(program_info)
+    
+    return {
+        "eligible": eligible_programs,
+        "ineligible": ineligible_programs
+    }
+
+def check_eligibility_for_specific_notice(pdf_name, user_info):
+    """특정 공고문에 대한 사용자 지원 자격 검증"""
+    
+    # 자격 관련 섹션 검색
+    eligibility_keywords = [
+        "지원자격",
+        "신청자격",
+        "입주자격",
+        "자격요건",
+        "신청대상"
+    ]
+    
+    eligibility_sections = []
+    for keyword in eligibility_keywords:
+        results = search_chunks(keyword, top_k=5, pdf_name=pdf_name)
+        if results and results['documents'] and results['documents'][0]:
+            eligibility_sections.extend(results['documents'][0])
+    
+    # 분석 결과를 저장할 딕셔너리
+    analysis_result = {
+        "pdf_name": pdf_name,
+        "eligible": True,
+        "matched_conditions": [],
+        "unmet_conditions": [],
+        "eligibility_details": {}
+    }
+    
+    # 연령 조건 확인
+    birth_year = int(user_info["birth_date"][:4])
+    current_year = datetime.datetime.now().year
+    age = current_year - birth_year + 1  # 한국 나이
+    
+    # 각 자격 조건 확인
+    for section in eligibility_sections:
+        # 1. 연령 제한 확인
+        age_patterns = [
+            r'(?:만\s*)?(\d+)세\s*(?:미만|이하|이상|초과)',
+            r'(?:만\s*)?(\d+)세부터\s*(?:만\s*)?(\d+)세까지',
+            r'(\d+)년(?:생|도)\s*(?:이후|이전)'
+        ]
+        
+        for pattern in age_patterns:
+            matches = re.finditer(pattern, section)
+            for match in matches:
+                age_text = match.group(0)
+                if "이하" in age_text or "미만" in age_text:
+                    age_limit = int(match.group(1))
+                    if age > age_limit:
+                        analysis_result["eligible"] = False
+                        analysis_result["unmet_conditions"].append(f"연령 조건: {age_text} (현재 {age}세)")
+                    else:
+                        analysis_result["matched_conditions"].append(f"연령 조건 충족: {age}세")
+                elif "이상" in age_text or "초과" in age_text:
+                    age_limit = int(match.group(1))
+                    if age < age_limit:
+                        analysis_result["eligible"] = False
+                        analysis_result["unmet_conditions"].append(f"연령 조건: {age_text} (현재 {age}세)")
+                    else:
+                        analysis_result["matched_conditions"].append(f"연령 조건 충족: {age}세")
+        
+        # 2. 소득 기준 확인
+        income_patterns = [
+            r'(?:소득|소득기준|평균소득)\s*(\d+)%\s*(?:이하|미만)',
+            r'(?:소득|소득기준|평균소득)\s*(\d+)%\s*초과'
+        ]
+        
+        user_income = int(user_info["income_range"].replace("% 이하", ""))
+        for pattern in income_patterns:
+            matches = re.finditer(pattern, section)
+            for match in matches:
+                income_text = match.group(0)
+                income_limit = int(match.group(1))
+                if "이하" in income_text or "미만" in income_text:
+                    if user_income > income_limit:
+                        analysis_result["eligible"] = False
+                        analysis_result["unmet_conditions"].append(f"소득 기준: {income_text}")
+                    else:
+                        analysis_result["matched_conditions"].append(f"소득 기준 충족: {user_income}%")
+        
+        # 3. 자산 기준 확인
+        asset_patterns = [
+            r'(?:총자산|자산)\s*(\d+)(?:만원|억원)\s*(?:이하|미만)',
+            r'(?:총자산|자산)\s*(\d+)(?:만원|억원)\s*초과'
+        ]
+        
+        for pattern in asset_patterns:
+            matches = re.finditer(pattern, section)
+            for match in matches:
+                asset_text = match.group(0)
+                asset_value = convert_to_won(match.group(1), asset_text)
+                if int(user_info["total_assets"]) > asset_value:
+                    analysis_result["eligible"] = False
+                    analysis_result["unmet_conditions"].append(f"자산 기준: {asset_text}")
+                else:
+                    analysis_result["matched_conditions"].append("자산 기준 충족")
+        
+        # 4. 차량 보유 기준 확인
+        if "차량" in section or "자동차" in section:
+            car_value = int(user_info["car_value"])
+            if car_value > 0:
+                analysis_result["eligible"] = False
+                analysis_result["unmet_conditions"].append("차량 보유 제한")
+            else:
+                analysis_result["matched_conditions"].append("차량 기준 충족")
+        
+        # 5. 수급자 관련 확인
+        if "수급자" in section and user_info["household_type"] == "생계·의료·주거급여 수급자 가구":
+            analysis_result["matched_conditions"].append("수급자 가구 조건 충족")
+        
+        # 6. 대학생 관련 확인
+        if "대학생" in section or "재학" in section:
+            if user_info["university_status"] == "재학 중":
+                analysis_result["matched_conditions"].append("대학생 조건 충족")
+            else:
+                analysis_result["unmet_conditions"].append("대학생(재학생) 조건 미충족")
+    
+    # 검증 결과 요약
+    analysis_result["eligibility_details"] = {
+        "total_conditions": len(analysis_result["matched_conditions"]) + len(analysis_result["unmet_conditions"]),
+        "matched_count": len(analysis_result["matched_conditions"]),
+        "unmet_count": len(analysis_result["unmet_conditions"])
+    }
+    
+    return analysis_result
+
+def print_eligibility_result(result):
+    """자격 검증 결과 출력"""
+    print("\n" + "=" * 80)
+    print(f"📋 공고문: {result['pdf_name']}")
+    print("=" * 80)
+    
+    if result["eligible"]:
+        print("\n✅ 지원 가능합니다!")
+    else:
+        print("\n❌ 지원 자격이 충족되지 않습니다.")
+    
+    print("\n[충족된 조건]")
+    for condition in result["matched_conditions"]:
+        print(f"✓ {condition}")
+    
+    if result["unmet_conditions"]:
+        print("\n[미충족된 조건]")
+        for condition in result["unmet_conditions"]:
+            print(f"✗ {condition}")
+    
+    print("\n[검증 결과 요약]")
+    print(f"- 전체 조건 수: {result['eligibility_details']['total_conditions']}")
+    print(f"- 충족된 조건 수: {result['eligibility_details']['matched_count']}")
+    print(f"- 미충족된 조건 수: {result['eligibility_details']['unmet_count']}")
+    print("=" * 80)
+
 # 사용 예시
 if __name__ == "__main__":
-    # 1. PDF 목록 확인
-    print("\n=== 저장된 PDF 파일 목록 ===")
-    pdf_files = get_pdf_list()
-    if not pdf_files:
-        print("저장된 PDF 파일이 없습니다.")
-        exit()
-
-    # 2. 특정 PDF 선택 (예시)
-    selected_pdf = pdf_files[0]
+    # 사용자 정보
+    user_info = {
+        "birth_date": "990101",
+        "gender": "남성",
+        "university_status": "재학 중",
+        "recent_graduate": "예",
+        "employed": "아니오",
+        "job_seeking": "아니오",
+        "household_type": "생계·의료·주거급여 수급자 가구",
+        "parents_own_house": "아니요",
+        "disability_in_family": "예",
+        "application_count": 2,
+        "total_assets": 1000000,
+        "car_value": 500000,
+        "income_range": "100% 이하"
+    }
     
-    # 3. 선택된 PDF의 섹션 목록 확인
-    print(f"\n=== {selected_pdf} 섹션 목록 ===")
-    sections = get_pdf_sections(selected_pdf)
+    # 특정 공고문 선택
+    pdf_name = "[마을과집]SH특화형 매입임대주택(청년) 입주자 모집 공고문_20250307.pdf"
     
-    # 4. 검색 예시
-    query = "청약 신청 자격 알려줘"
+    # 자격 검증
+    result = check_eligibility_for_specific_notice(pdf_name, user_info)
     
-    # 4.1 전체 PDF에서 검색
-    print("\n=== 전체 PDF 검색 ===")
-    all_results = search_chunks(query, top_k=3)
-    
-    # 4.2 특정 PDF에서만 검색
-    print(f"\n=== {selected_pdf} 검색 ===")
-    pdf_results = search_chunks(query, top_k=3, pdf_name=selected_pdf)
-    
-    # 5. 특정 PDF의 전체 내용 저장
-    save_pdf_content(selected_pdf, output_format="txt")
-    
-    # 6. 특정 PDF의 특정 섹션 내용 저장 (섹션이 있는 경우)
-    if sections:
-        save_pdf_content(selected_pdf, output_format="txt", section_title=sections[0])
-    
-    # 7. 검색 결과 저장
-    save_results_to_json(all_results, query)
+    # 결과 출력
+    print_eligibility_result(result)
