@@ -24,7 +24,7 @@ def cleanup_temp_files():
     except Exception as e:
         logger.error(f"임시 파일 정리 중 오류 발생: {str(e)}")
 
-def process_pdf_folder(pdf_folder="./PDF_1", output_folder="./processed_docs"):
+def process_pdf_folder(pdf_folder="./PDF_2", output_folder="./processed_docs"):
     """PDF 폴더의 모든 파일을 처리하는 함수"""
     # 출력 폴더 생성
     os.makedirs(output_folder, exist_ok=True)
@@ -58,8 +58,14 @@ def process_pdf_folder(pdf_folder="./PDF_1", output_folder="./processed_docs"):
                     # 태깅 적용
                     tagged_text = title_tagging(markdown_text)
                     
-                    # 청크로 분할
-                    chunks = split_into_chunks(tagged_text)
+                    # 태그 기반으로 청크 분할
+                    chunks = split_into_chunks_by_headings(tagged_text)
+                    
+                    # 각 청크 확인
+                    for i, chunk in enumerate(chunks, 1):
+                        print(f"\n=== 청크 {i} ===")
+                        print(chunk)
+                        print("=" * 50)
                     
                     # 결과 저장
                     save_processed_document(pdf_file, chunks, output_folder)
@@ -102,23 +108,63 @@ def title_tagging(text):
     
     return '\n'.join(tagged_lines)
 
-def split_into_chunks(text, chunk_size=1000, overlap=200):
-    """텍스트를 청크로 분할"""
-    # 문단으로 분할
-    paragraphs = re.split(r'\n\s*\n', text)
+def split_into_chunks_by_headings(text, max_chunk_size=3000):
+    """제목 태그를 기준으로 청크 분할"""
     chunks = []
-    current_chunk = ""
+    current_chunk = []
+    current_heading = None
+    current_length = 0
     
-    for paragraph in paragraphs:
-        if len(current_chunk) + len(paragraph) < chunk_size:
-            current_chunk += paragraph + "\n\n"
+    # 줄 단위로 처리
+    lines = text.split('\n')
+    i = 0
+    
+    while i < len(lines):
+        line = lines[i].strip()
+        
+        # 제목 태그 확인
+        heading_match = re.match(r'<h(\d)>(.*?)</h\1>', line)
+        
+        if heading_match:
+            # 이전 청크 저장
+            if current_chunk and current_heading:
+                chunk_text = current_heading + '\n' + '\n'.join(current_chunk)
+                chunks.append(chunk_text.strip())
+            
+            # 새로운 청크 시작
+            current_heading = line
+            current_chunk = []
+            current_length = len(line)
+            
         else:
-            if current_chunk:
-                chunks.append(current_chunk.strip())
-            current_chunk = paragraph + "\n\n"
+            # 제목이 아직 없는 경우 스킵
+            if not current_heading:
+                i += 1
+                continue
+            
+            # 현재 줄 추가
+            line_length = len(line)
+            
+            # 최대 크기 체크
+            if current_length + line_length > max_chunk_size:
+                # 현재 청크 저장
+                chunk_text = current_heading + '\n' + '\n'.join(current_chunk)
+                chunks.append(chunk_text.strip())
+                
+                # 새 청크 시작 (같은 제목 유지)
+                current_chunk = []
+                current_length = len(current_heading)
+            
+            if line:  # 빈 줄이 아닌 경우만 추가
+                current_chunk.append(line)
+                current_length += line_length
+        
+        i += 1
     
-    if current_chunk:
-        chunks.append(current_chunk.strip())
+    # 마지막 청크 처리
+    if current_chunk and current_heading:
+        chunk_text = current_heading + '\n' + '\n'.join(current_chunk)
+        chunks.append(chunk_text.strip())
     
     return chunks
 
