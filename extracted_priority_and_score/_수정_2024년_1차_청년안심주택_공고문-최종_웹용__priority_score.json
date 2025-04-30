@@ -1,0 +1,56 @@
+{
+  "priority_criteria": [
+    {
+      "priority": "1순위",
+      "criteria": [
+        "생계·의료·주거급여 수급자가구"
+      ]
+    },
+    {
+      "priority": "2순위",
+      "criteria": [
+        "보호대상 한부모가족",
+        "차상위계층 가구"
+      ]
+    },
+    {
+      "priority": "3순위",
+      "criteria": [
+        "일반"
+      ]
+    }
+  ],
+  "score_items": [
+    {
+      "priority": "1순위",
+      "items": [
+        {
+          "item": "생계·의료·주거급여 수급자",
+          "score": "3"
+        }
+      ]
+    },
+    {
+      "priority": "2순위",
+      "items": [
+        {
+          "item": "보호대상 한부모가족",
+          "score": "3"
+        },
+        {
+          "item": "차상위계층 가구",
+          "score": "3"
+        }
+      ]
+    },
+    {
+      "priority": "3순위",
+      "items": [
+        {
+          "item": "일반",
+          "score": "null"
+        }
+      ]
+    }
+  ]
+}

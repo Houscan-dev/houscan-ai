@@ -1,0 +1,68 @@
+{
+  "priority_criteria": [
+    {
+      "priority": "1순위",
+      "criteria": [
+        "보호대상 한부모가족",
+        "차상위계층 가구"
+      ]
+    },
+    {
+      "priority": "2순위",
+      "criteria": [
+        "일반"
+      ]
+    },
+    {
+      "priority": "3순위",
+      "criteria": [
+        "일반"
+      ]
+    }
+  ],
+  "score_items": [
+    {
+      "priority": "1순위",
+      "items": [
+        {
+          "item": "②보호대상 한부모가족",
+          "score": "3"
+        }
+      ]
+    },
+    {
+      "priority": "2, 3순위",
+      "items": [
+        {
+          "item": "③소득기준50%이하 소득수준이해당순위소득기준의50%이하인경우",
+          "score": "3"
+        }
+      ]
+    },
+    {
+      "priority": "공통",
+      "items": [
+        {
+          "item": "④부모무주택",
+          "score": "2"
+        },
+        {
+          "item": "⑤타지역출신",
+          "score": "2"
+        },
+        {
+          "item": "⑥민간임대주택 거주자",
+          "score": "1"
+        },
+        {
+          "item": "⑦장애인(본인)",
+          "score": "2"
+        },
+        {
+          "item": "⑦장애인가구",
+          "score": "1"
+        }
+      ]
+    }
+  ]
+}

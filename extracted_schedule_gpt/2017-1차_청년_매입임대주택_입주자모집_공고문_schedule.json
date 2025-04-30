@@ -1,0 +1,28 @@
+{
+  "announcement_date": "2017.10.12",
+  "online_application_period": {
+    "start": "2017.11.7",
+    "end": "2017.11.10"
+  },
+  "document_submission_period": {
+    "start": "2017.11.27",
+    "end": "2017.11.29"
+  },
+  "inspection_period": {
+    "start": "2017.11",
+    "end": "2017.11"
+  },
+  "winner_announcement": "2018.02.14",
+  "contract_period": {
+    "start": "2018.02.26",
+    "end": "2018.02.28"
+  },
+  "payment_period": {
+    "start": null,
+    "end": null
+  },
+  "move_in_period": {
+    "start": "2018.03",
+    "end": null
+  }
+}

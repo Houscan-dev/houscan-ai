@@ -1,0 +1,28 @@
+{
+  "announcement_date": "2020.05.20",
+  "online_application_period": {
+    "start": "2020.06.01",
+    "end": "2020.06.03"
+  },
+  "document_submission_period": {
+    "start": null,
+    "end": null
+  },
+  "inspection_period": {
+    "start": null,
+    "end": null
+  },
+  "winner_announcement": "2020.09.11 16:00",
+  "contract_period": {
+    "start": "2020.09.23",
+    "end": "2020.09.28"
+  },
+  "payment_period": {
+    "start": null,
+    "end": null
+  },
+  "move_in_period": {
+    "start": "2020.10.01",
+    "end": "2020.10.31"
+  }
+}

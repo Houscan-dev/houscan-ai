@@ -1,0 +1,28 @@
+{
+  "announcement_date": "2025.03.24",
+  "online_application_period": {
+    "start": "2025.03.24",
+    "end": "2025.03.27"
+  },
+  "document_submission_period": {
+    "start": "2025.03.24",
+    "end": "2025.03.27"
+  },
+  "inspection_period": {
+    "start": "2025.03",
+    "end": null
+  },
+  "winner_announcement": "2025.06.03 00:00",
+  "contract_period": {
+    "start": "2025.03.24",
+    "end": "2025.03.27"
+  },
+  "payment_period": {
+    "start": null,
+    "end": null
+  },
+  "move_in_period": {
+    "start": null,
+    "end": null
+  }
+}
