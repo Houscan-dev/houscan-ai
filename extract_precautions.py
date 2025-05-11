@@ -6,7 +6,6 @@ import json
 import re
 import logging
 from typing import Dict, Any, List
-import PyPDF2
 from pathlib import Path
 
 import chromadb
