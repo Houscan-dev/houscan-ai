@@ -1,0 +1,114 @@
+{
+  "housing_info": [
+    {
+      "name": "홍원하이빌강북7",
+      "address": "삼양로119길22,수유동313-6",
+      "total_households": "21B",
+      "supply_households": 13,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "21.41",
+      "elevator": false,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "계림웨스트밸리",
+      "address": "경인로70,오류동360",
+      "total_households": "37A",
+      "supply_households": 5,
+      "type": "오피스텔 (분리형원룸)",
+      "house_type": "37.2",
+      "elevator": true,
+      "parking": "자주식 (지상/지하)"
+    },
+    {
+      "name": "명진하이빌",
+      "address": "부일로17길44,궁동190-84,85",
+      "total_households": "20B",
+      "supply_households": 7,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "20.72",
+      "elevator": false,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "하늘사랑채3차",
+      "address": "고척로33나길4,고척동253-40,56",
+      "total_households": "23B",
+      "supply_households": 14,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "23.01",
+      "elevator": false,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "낙원가우디움",
+      "address": "고척로27마길26-11,고척동241-157",
+      "total_households": "22B",
+      "supply_households": 14,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "22.72",
+      "elevator": false,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "서전하우스",
+      "address": "범안로12가길31-10, 독산동1006-167",
+      "total_households": "21B",
+      "supply_households": 13,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "21.79",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "아이빌10차",
+      "address": "금하로23나길29,시흥동826-38",
+      "total_households": "28B",
+      "supply_households": 5,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "28.53",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "청춘가옥",
+      "address": "독산로50길130-9, 시흥동3-123",
+      "total_households": null,
+      "supply_households": 20,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "27.31",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "위드151B동",
+      "address": "도봉로151길63,방학동647-10",
+      "total_households": null,
+      "supply_households": 8,
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "26.96",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "와이하우스",
+      "address": "자동차시장3길93,용답동238-5",
+      "total_households": null,
+      "supply_households": 349,
+      "type": "오피스텔 (분리형원룸)",
+      "house_type": "30.7",
+      "elevator": true,
+      "parking": "자주식(지하) /기계식"
+    },
+    {
+      "name": "비전하우스",
+      "address": "곰달래로1길36-1,신월동135-16",
+      "total_households": "19B",
+      "supply_households": 9,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "19.68",
+      "elevator": false,
+      "parking": "자주식 (지상)"
+    }
+  ]
+}

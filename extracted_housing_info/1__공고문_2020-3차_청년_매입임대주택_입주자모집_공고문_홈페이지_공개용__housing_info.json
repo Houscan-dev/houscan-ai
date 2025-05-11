@@ -1,0 +1,64 @@
+{
+  "housing_info": [
+    {
+      "name": "백년빌",
+      "address": "서울특별시 강남구 개포로24길13, 백년빌",
+      "total_households": null,
+      "supply_households": 7,
+      "type": null,
+      "house_type": "26㎡",
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "위시희망",
+      "address": "서울특별시 강동구 천호옛8길3, 위시희망",
+      "total_households": null,
+      "supply_households": 3,
+      "type": null,
+      "house_type": "31㎡",
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "지오빌",
+      "address": "서울특별시 광진구 자양번영로3나길31, 지오빌",
+      "total_households": null,
+      "supply_households": 3,
+      "type": null,
+      "house_type": "40㎡",
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "다움파크빌",
+      "address": "서울특별시 서대문구 증가로24가길11, 다움파크빌",
+      "total_households": null,
+      "supply_households": 1,
+      "type": null,
+      "house_type": "19㎡",
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "논현로5길15-20",
+      "address": "서울특별시 서초구 논현로5길15-20",
+      "total_households": null,
+      "supply_households": 16,
+      "type": null,
+      "house_type": "27㎡",
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "논현로7길36",
+      "address": "서울특별시 서초구 논현로7길36",
+      "total_households": null,
+      "supply_households": 17,
+      "type": null,
+      "house_type": "30㎡",
+      "elevator": false,
+      "parking": null
+    }
+  ]
+}

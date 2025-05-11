@@ -1,0 +1,84 @@
+{
+  "housing_info": [
+    {
+      "name": "KAINOS-HOUSE",
+      "address": "솔샘로5길31, 정릉동692-13외3필지, 성북구",
+      "total_households": "29호",
+      "supply_households": "4호",
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "35A 40A",
+      "elevator": false,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "희망",
+      "address": "동남로23가길4-12, 오금동58-1외1필지, 송파구",
+      "total_households": "17호",
+      "supply_households": "11호",
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "27B",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "명칭없음",
+      "address": "백제고분로24길7, 삼전동50-14, 송파구",
+      "total_households": "13호",
+      "supply_households": "3호",
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "26B",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "라벨메종4",
+      "address": "가락로39길26, 방이동152-15, 송파구",
+      "total_households": "10호",
+      "supply_households": "7호",
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "26B",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "K-House응암",
+      "address": "가좌로10길29-16, 응암동579-14, 은평구",
+      "total_households": "13호",
+      "supply_households": "4호",
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "28B",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "대상주택",
+      "address": "양재대로143길31, 명일동312-143, 강동구",
+      "total_households": "15호",
+      "supply_households": "14호",
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "29B",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "명칭없음",
+      "address": "솔매로41길32, 미아동223-4",
+      "total_households": "16호",
+      "supply_households": "12호",
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "27B",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    },
+    {
+      "name": "T&K신림Ⅳ",
+      "address": "남부순환로155길23, 신림동509-1, 관악구",
+      "total_households": "16호",
+      "supply_households": "6호",
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "34A",
+      "elevator": true,
+      "parking": "자주식 (지상)"
+    }
+  ]
+}

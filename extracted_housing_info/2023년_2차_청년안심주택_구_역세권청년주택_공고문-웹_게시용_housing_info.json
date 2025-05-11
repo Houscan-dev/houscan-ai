@@ -1,0 +1,54 @@
+{
+  "housing_info": [
+    {
+      "name": "강서구화곡동1170",
+      "address": "강서구 화곡동 1170",
+      "total_households": "23",
+      "supply_households": "23",
+      "type": "청년",
+      "house_type": "B",
+      "elevator": true,
+      "parking": "68,533"
+    },
+    {
+      "name": "천호역한강리슈빌 강동구천호동458-3",
+      "address": "강동구 천호동 458-3",
+      "total_households": "14",
+      "supply_households": "14",
+      "type": "청년",
+      "house_type": "A",
+      "elevator": true,
+      "parking": "34,990"
+    },
+    {
+      "name": "엘크루발산 강서구등촌동671-1",
+      "address": "강서구 등촌동 671-1",
+      "total_households": "30",
+      "supply_households": "30",
+      "type": "청년",
+      "house_type": "A",
+      "elevator": true,
+      "parking": "55,100"
+    },
+    {
+      "name": "와이엔타워 노원구공릉동617-3",
+      "address": "노원구 공릉동 617-3",
+      "total_households": "16",
+      "supply_households": "16",
+      "type": "청년",
+      "house_type": "A",
+      "elevator": true,
+      "parking": "27,930"
+    },
+    {
+      "name": "제이스타상봉 중랑구상봉동109-34",
+      "address": "중랑구 상봉동 109-34",
+      "total_households": "31",
+      "supply_households": "31",
+      "type": "청년",
+      "house_type": "A",
+      "elevator": true,
+      "parking": "49,760"
+    }
+  ]
+}

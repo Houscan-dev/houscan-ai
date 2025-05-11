@@ -1,0 +1,54 @@
+{
+  "housing_info": [
+    {
+      "name": "삼양로163가길10",
+      "address": "강북구",
+      "total_households": "36A",
+      "supply_households": 3,
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "도원휴먼빌 33A",
+      "address": "강북구",
+      "total_households": "46A",
+      "supply_households": 1,
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "더이룸하우스",
+      "address": "강북구",
+      "total_households": "32A 35A",
+      "supply_households": 3,
+      "type": "도시형생활주택",
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "더이룸하우스",
+      "address": "강북구",
+      "total_households": "32A 35A",
+      "supply_households": 7,
+      "type": "분리형원룸",
+      "house_type": null,
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "더이룸하우스",
+      "address": "강북구",
+      "total_households": "39A",
+      "supply_households": 5,
+      "type": "도시형생활주택",
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    }
+  ]
+}

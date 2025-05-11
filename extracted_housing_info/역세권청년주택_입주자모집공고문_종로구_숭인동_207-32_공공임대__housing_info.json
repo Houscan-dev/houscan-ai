@@ -1,0 +1,74 @@
+{
+  "housing_info": [
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "16㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "18A㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "18B㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "20㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "21㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "22㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "숭인동 주택",
+      "address": "종로구숭인동 207-32",
+      "total_households": null,
+      "supply_households": 31,
+      "type": "공공 임대",
+      "house_type": "41㎡",
+      "elevator": false,
+      "parking": "개별 난방"
+    }
+  ]
+}

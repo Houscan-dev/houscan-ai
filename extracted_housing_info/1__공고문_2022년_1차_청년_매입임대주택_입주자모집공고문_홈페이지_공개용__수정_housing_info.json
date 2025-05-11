@@ -1,0 +1,114 @@
+{
+  "housing_info": [
+    {
+      "name": "해담빌",
+      "address": "구천면로40길7, 천호동237-27",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "29㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "WISH희망",
+      "address": "천호옛8길3, 성내동127-13",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "37㎡",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "*강동서영스윗홈",
+      "address": "천중로48길 9-13, 길동349-9",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "23㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "성신하우스",
+      "address": "인수봉로38길10, 수유동468-33",
+      "total_households": 3,
+      "supply_households": null,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "14㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "더리치",
+      "address": "긴고랑로1길35, 중곡동235-22외",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "28㎡",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "지오빌",
+      "address": "자양번영로3나길31, 자양동589-5외",
+      "total_households": 2,
+      "supply_households": null,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "30㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "휴먼에코빌4차A동",
+      "address": "독산로96길 27-6, 독산동234-22",
+      "total_households": 1,
+      "supply_households": null,
+      "type": "다가구주택 (3룸)",
+      "house_type": "54㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "휴먼에코빌4차B동",
+      "address": null,
+      "total_households": 1,
+      "supply_households": null,
+      "type": "다가구주택 (분리형원룸)",
+      "house_type": "29㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "아이빌7차",
+      "address": "독산로20길 13, 시흥동833-13",
+      "total_households": 3,
+      "supply_households": null,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "28㎡",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "동원힐하스",
+      "address": "공릉로26길 28, 공릉동645-16외",
+      "total_households": 1,
+      "supply_households": null,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "18㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "더존에이스빌가동",
+      "address": "천호대로89길51, 장안동445-3",
+      "total_households": 1,
+      "supply_households": null,
+      "type": "다가구주택 (3룸)",
+      "house_type": "58㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    }
+  ]
+}

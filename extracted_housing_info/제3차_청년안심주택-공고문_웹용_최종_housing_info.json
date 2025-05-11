@@ -1,0 +1,44 @@
+{
+  "housing_info": [
+    {
+      "name": "신혼Ⅰ",
+      "address": null,
+      "total_households": "17",
+      "supply_households": "17",
+      "type": "신혼부부",
+      "house_type": "B",
+      "elevator": false,
+      "parking": "31,560"
+    },
+    {
+      "name": "청년",
+      "address": null,
+      "total_households": "6",
+      "supply_households": "6",
+      "type": "청년",
+      "house_type": "A",
+      "elevator": false,
+      "parking": "52,600"
+    },
+    {
+      "name": null,
+      "address": null,
+      "total_households": "25",
+      "supply_households": "25",
+      "type": "청년",
+      "house_type": "B",
+      "elevator": true,
+      "parking": "57,800"
+    },
+    {
+      "name": null,
+      "address": null,
+      "total_households": "20",
+      "supply_households": "20",
+      "type": null,
+      "house_type": "A B B",
+      "elevator": true,
+      "parking": null
+    }
+  ]
+}

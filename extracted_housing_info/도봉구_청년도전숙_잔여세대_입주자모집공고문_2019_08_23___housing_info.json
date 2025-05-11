@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "도봉 주택",
+      "address": "서울시 도봉구 도봉로 2 162 길 30( 도봉 동 2 625-35 외 필지 2 )",
+      "total_households": "11 세대",
+      "supply_households": null,
+      "type": null,
+      "house_type": null,
+      "elevator": false,
+      "parking": "주차장 (8 면)"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "housing_info": [
+    {
+      "name": "명칭없음 ※ (언주로136길35, 논현동108-10)",
+      "address": "강남구",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "14.57㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "*강동서영스윗홈5 (양재대로91길84, 성내동420-4)",
+      "address": "강동구",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "23.23㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "*현도빌리지6 (아리수로64길8,고덕동627)",
+      "address": "강동구",
+      "total_households": null,
+      "supply_households": 5,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "32.35㎡",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "성신하우스 (인수봉로38길10, 수유동468-33)",
+      "address": "강북구",
+      "total_households": null,
+      "supply_households": 3,
+      "type": "도시형생활주택 (개방형원룸)",
+      "house_type": "14.03㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "구의에스하임1 (광나루로30나길15,구의동638-5,6)",
+      "address": "광진구",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "37.14㎡",
+      "elevator": false,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "*대정이오스 (오리로13길50, 오류동240-7)",
+      "address": "구로구",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택 (분리형원룸)",
+      "house_type": "44.11㎡",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    }
+  ]
+}

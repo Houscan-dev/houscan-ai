@@ -1,0 +1,34 @@
+{
+  "housing_info": [
+    {
+      "name": "옥산그린타워",
+      "address": "광진구 구의동 587-64",
+      "total_households": null,
+      "supply_households": 2,
+      "type": null,
+      "house_type": "32A",
+      "elevator": false,
+      "parking": "자주식:282대 (장애인주차대수:9대)"
+    },
+    {
+      "name": "어바니엘위드더스타일",
+      "address": "서대문구 충정로3가 480",
+      "total_households": null,
+      "supply_households": 11,
+      "type": null,
+      "house_type": "35A",
+      "elevator": false,
+      "parking": "자주식:282대 (장애인주차대수:9대)"
+    },
+    {
+      "name": "서교동효성해링턴타워",
+      "address": "마포구 서교동 494",
+      "total_households": null,
+      "supply_households": 20,
+      "type": null,
+      "house_type": "37B (셰어형)",
+      "elevator": false,
+      "parking": "자주식:282대 (장애인주차대수:9대)"
+    }
+  ]
+}

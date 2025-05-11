@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "대명파크힐",
+      "address": "서울특별시 서초구 강남대로2길 79 (양재동 361-5)",
+      "total_households": null,
+      "supply_households": "1호",
+      "type": "청년 단독거주",
+      "house_type": "방0",
+      "elevator": true,
+      "parking": "수 지상5층 (엘리베이터 있음)"
+    }
+  ]
+}

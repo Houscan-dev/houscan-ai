@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "스마트웰",
+      "address": "서울특별시 금천구 독산로72길 64, 스마트웰 (독산동 913)",
+      "total_households": null,
+      "supply_households": "1호",
+      "type": null,
+      "house_type": "0",
+      "elevator": false,
+      "parking": "자동차등록증 상 본인명의 및 영업용 차량만 주차가능"
+    }
+  ]
+}

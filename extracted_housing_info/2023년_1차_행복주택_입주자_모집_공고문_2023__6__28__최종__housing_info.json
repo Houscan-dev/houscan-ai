@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "더 더블유 서울",
+      "address": "null",
+      "total_households": "null",
+      "supply_households": "null",
+      "type": "null",
+      "house_type": "null",
+      "elevator": false,
+      "parking": "기계식 주차장만 이용 가능, 일부 차종 주차 불가능"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "housing_info": [
+    {
+      "name": "은슬림10",
+      "address": "탑골로7길11, 시흥동220-116",
+      "total_households": null,
+      "supply_households": 25,
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "T&K반포",
+      "address": "주흥9길8-13, 반포동716-5",
+      "total_households": null,
+      "supply_households": 10,
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "T&K반포",
+      "address": "주흥9길8-13, 반포동716-5",
+      "total_households": null,
+      "supply_households": 2,
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "Oaktreevil DR2",
+      "address": "대림로35길8-1, 대림동775-11",
+      "total_households": null,
+      "supply_households": 18,
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "Oaktreevil DR2",
+      "address": "대림로35길8-1, 대림동775-11",
+      "total_households": null,
+      "supply_households": 1,
+      "type": "도시형생활주택",
+      "house_type": "2룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "민하우스2",
+      "address": "가마산로46가길5,대림동680-3",
+      "total_households": null,
+      "supply_households": 6,
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "민하우스2",
+      "address": "가마산로46가길5,대림동680-3",
+      "total_households": null,
+      "supply_households": 2,
+      "type": "도시형생활주택",
+      "house_type": "분리형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "리츠하우스2",
+      "address": "갈현로11가길14-4, 구산동177-53",
+      "total_households": null,
+      "supply_households": 15,
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    },
+    {
+      "name": "리츠하우스2",
+      "address": "갈현로11가길14-4, 구산동177-53",
+      "total_households": null,
+      "supply_households": 4,
+      "type": "도시형생활주택",
+      "house_type": "개방형원룸",
+      "elevator": true,
+      "parking": "자주식(지상)"
+    }
+  ]
+}

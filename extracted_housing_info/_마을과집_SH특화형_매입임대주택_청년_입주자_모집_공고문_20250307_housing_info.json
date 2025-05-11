@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "특화형  매입 임대주택",
+      "address": "서울특별시 중구 명동10길 35-4 전진상 교육관 內(내) 마을과집",
+      "total_households": null,
+      "supply_households": null,
+      "type": "매입 임대",
+      "house_type": null,
+      "elevator": null,
+      "parking": null
+    }
+  ]
+}

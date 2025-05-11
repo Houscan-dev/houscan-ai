@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "동북권세대융합 형 복합시설",
+      "address": "서울시",
+      "total_households": null,
+      "supply_households": null,
+      "type": null,
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    }
+  ]
+}

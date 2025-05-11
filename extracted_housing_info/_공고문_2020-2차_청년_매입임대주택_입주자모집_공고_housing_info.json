@@ -1,0 +1,44 @@
+{
+  "housing_info": [
+    {
+      "name": "해담빌",
+      "address": "서울특별시강동구구천면로40길7",
+      "total_households": null,
+      "supply_households": 5,
+      "type": null,
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "휴먼에코빌4차B동",
+      "address": "서울특별시금천구독산로96길27-6",
+      "total_households": null,
+      "supply_households": 5,
+      "type": null,
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "삼화에코빌2차B동",
+      "address": "서울특별시동대문구답십리로65길114 삼화에코빌2차B동(장안동287-7,9)",
+      "total_households": null,
+      "supply_households": 4,
+      "type": null,
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    },
+    {
+      "name": "더존에이스빌나동",
+      "address": "서울특별시동대문구천호대로89길51",
+      "total_households": null,
+      "supply_households": 5,
+      "type": null,
+      "house_type": null,
+      "elevator": false,
+      "parking": null
+    }
+  ]
+}

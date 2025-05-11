@@ -1,0 +1,54 @@
+{
+  "housing_info": [
+    {
+      "name": "리마크빌군자",
+      "address": "광진구 중곡동637-5",
+      "total_households": null,
+      "supply_households": 93,
+      "type": "매입임대",
+      "house_type": "30.17㎡",
+      "elevator": false,
+      "parking": "주차장 정보 미제공"
+    },
+    {
+      "name": "선릉역마에스트로",
+      "address": "강남구 삼성동140-32",
+      "total_households": null,
+      "supply_households": 93,
+      "type": "매입임대",
+      "house_type": "22A㎡",
+      "elevator": false,
+      "parking": "주차장 정보 미제공"
+    },
+    {
+      "name": "문정역마에스트로",
+      "address": "송파구 문정동55-6",
+      "total_households": null,
+      "supply_households": 93,
+      "type": "매입임대",
+      "house_type": "34㎡",
+      "elevator": false,
+      "parking": "주차장 정보 미제공"
+    },
+    {
+      "name": "선정릉역모아엘가퍼스트홈",
+      "address": "강남구 논현동278-4",
+      "total_households": null,
+      "supply_households": 93,
+      "type": "매입임대",
+      "house_type": "14㎡",
+      "elevator": false,
+      "parking": "주차장 정보 미제공"
+    },
+    {
+      "name": "힐데스하임",
+      "address": "성동구 용답동233-1",
+      "total_households": 93,
+      "supply_households": null,
+      "type": null,
+      "house_type": "14㎡",
+      "elevator": false,
+      "parking": "주차장 정보 미제공"
+    }
+  ]
+}

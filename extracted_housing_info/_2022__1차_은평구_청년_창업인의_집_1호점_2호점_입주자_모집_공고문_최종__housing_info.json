@@ -1,0 +1,44 @@
+{
+  "housing_info": [
+    {
+      "name": "청년창업인의집 1 호 점",
+      "address": null,
+      "total_households": null,
+      "supply_households": "4 세대 (1 호점 3 세대 ,  2 호점 1 세대 )",
+      "type": null,
+      "house_type": "29.74㎡",
+      "elevator": null,
+      "parking": "공용시설 커뮤니티실 층 주차면수 : ( 1 ) , 15 대옥상등"
+    },
+    {
+      "name": "청년창업인의집 1 호 점",
+      "address": null,
+      "total_households": null,
+      "supply_households": null,
+      "type": null,
+      "house_type": "47.06㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "청년창업인의집 1 호 점",
+      "address": null,
+      "total_households": null,
+      "supply_households": null,
+      "type": null,
+      "house_type": "51.65㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "청년창업인의집 2 호점",
+      "address": null,
+      "total_households": null,
+      "supply_households": null,
+      "type": null,
+      "house_type": "25.01㎡",
+      "elevator": null,
+      "parking": null
+    }
+  ]
+}

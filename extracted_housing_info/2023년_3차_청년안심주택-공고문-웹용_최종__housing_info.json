@@ -1,0 +1,84 @@
+{
+  "housing_info": [
+    {
+      "name": "청계로벤하임",
+      "address": "종로구 숭인동240-1",
+      "total_households": null,
+      "supply_households": 39,
+      "type": null,
+      "house_type": "39.29㎡",
+      "elevator": false,
+      "parking": "73.11㎡"
+    },
+    {
+      "name": "중구광희동1가",
+      "address": "166",
+      "total_households": null,
+      "supply_households": 15,
+      "type": null,
+      "house_type": "15.51㎡",
+      "elevator": false,
+      "parking": "30.68㎡"
+    },
+    {
+      "name": "호반베르디움스테이원",
+      "address": null,
+      "total_households": 67,
+      "supply_households": 36,
+      "type": null,
+      "house_type": "36.22㎡",
+      "elevator": false,
+      "parking": "86.34㎡"
+    },
+    {
+      "name": "은평구대조동241",
+      "address": null,
+      "total_households": 67,
+      "supply_households": 36,
+      "type": null,
+      "house_type": "36.24㎡",
+      "elevator": false,
+      "parking": "86.32㎡"
+    },
+    {
+      "name": "강서구등촌동671-1",
+      "address": null,
+      "total_households": null,
+      "supply_households": 18,
+      "type": "청년",
+      "house_type": "91.8㎡",
+      "elevator": true,
+      "parking": "73.44㎡"
+    },
+    {
+      "name": "비바힐스강변",
+      "address": null,
+      "total_households": 32,
+      "supply_households": 1,
+      "type": "청년",
+      "house_type": "48.24㎡",
+      "elevator": true,
+      "parking": "38.592㎡"
+    },
+    {
+      "name": "광진구구의동593-11",
+      "address": null,
+      "total_households": null,
+      "supply_households": 32,
+      "type": null,
+      "house_type": "80.4㎡",
+      "elevator": false,
+      "parking": "64.32㎡"
+    },
+    {
+      "name": "인히어쌍문",
+      "address": null,
+      "total_households": 19,
+      "supply_households": 3,
+      "type": "청년",
+      "house_type": "26.92㎡",
+      "elevator": true,
+      "parking": "21.536㎡"
+    }
+  ]
+}

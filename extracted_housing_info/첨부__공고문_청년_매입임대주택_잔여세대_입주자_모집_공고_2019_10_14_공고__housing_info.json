@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "다가구",
+      "address": "null",
+      "total_households": "null",
+      "supply_households": "null",
+      "type": "공동거주형 단독거주형 원룸",
+      "house_type": "null",
+      "elevator": null,
+      "parking": "세탁기, 냉장고, 가스렌지, 책상, 의자, 옷장"
+    }
+  ]
+}

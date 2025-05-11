@@ -1,0 +1,64 @@
+{
+  "housing_info": [
+    {
+      "name": "용산원효루미니",
+      "address": "용산구 원효로1가 134",
+      "total_households": "17",
+      "supply_households": "4",
+      "type": null,
+      "house_type": "17㎡",
+      "elevator": true,
+      "parking": "입주자필수 (장애인·유자녀·생계형)"
+    },
+    {
+      "name": "포르투나블루",
+      "address": "강서구 화곡동 1073-11",
+      "total_households": "20",
+      "supply_households": "1",
+      "type": null,
+      "house_type": "20㎡",
+      "elevator": true,
+      "parking": "협의요금"
+    },
+    {
+      "name": "선정릉역모아엘가퍼스트홈",
+      "address": "강남구 논현동 278-4",
+      "total_households": "18",
+      "supply_households": "1",
+      "type": null,
+      "house_type": "18㎡",
+      "elevator": true,
+      "parking": "공영주차장요금"
+    },
+    {
+      "name": "리마크빌군자",
+      "address": "광진구 중곡동 637-5",
+      "total_households": "16.32",
+      "supply_households": "1",
+      "type": null,
+      "house_type": "16.32㎡",
+      "elevator": true,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "잠실센트럴파크",
+      "address": "송파구 잠실동 187-10",
+      "total_households": "43",
+      "supply_households": "4",
+      "type": null,
+      "house_type": "43㎡",
+      "elevator": true,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "청계로벤하임",
+      "address": null,
+      "total_households": "34",
+      "supply_households": "1",
+      "type": null,
+      "house_type": "34.79㎡",
+      "elevator": true,
+      "parking": "개별 난방"
+    }
+  ]
+}

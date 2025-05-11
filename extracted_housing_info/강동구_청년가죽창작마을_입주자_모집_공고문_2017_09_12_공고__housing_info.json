@@ -1,0 +1,14 @@
+{
+  "housing_info": [
+    {
+      "name": "상암로 27 길 28-7",
+      "address": "상암로 27 길 28-7",
+      "total_households": null,
+      "supply_households": "16 호",
+      "type": null,
+      "house_type": "23~29",
+      "elevator": false,
+      "parking": "1 호 (54 \\u33a1 /1 층 ) 8 대"
+    }
+  ]
+}

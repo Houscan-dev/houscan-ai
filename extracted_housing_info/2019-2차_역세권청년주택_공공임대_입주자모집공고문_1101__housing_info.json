@@ -1,0 +1,24 @@
+{
+  "housing_info": [
+    {
+      "name": "U-삼진랜드",
+      "address": "성동구용답동233-1",
+      "total_households": null,
+      "supply_households": 22,
+      "type": "매입임대",
+      "house_type": "14",
+      "elevator": true,
+      "parking": "개별 난방"
+    },
+    {
+      "name": "서교동효성 해링턴타워",
+      "address": "마포구서교동395-43",
+      "total_households": null,
+      "supply_households": 162,
+      "type": "매입임대",
+      "house_type": "17",
+      "elevator": true,
+      "parking": "개별 난방"
+    }
+  ]
+}
