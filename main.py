@@ -1,28 +1,16 @@
 """
 Houscan AI 메인 애플리케이션
 """
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from api.routes import router as api_router
+from api.app import app
+import logging
 
-app = FastAPI(
-    title="Houscan AI API",
-    description="주택 관련 문서 분석 및 자격요건 확인 API",
-    version="1.0.0"
+# 로깅 설정
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
 )
-
-# CORS 설정
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # 실제 운영 환경에서는 특정 도메인만 허용하도록 수정
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# API 라우터 등록
-app.include_router(api_router, prefix="/api/v1")
+logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000) 
+    logger.info("Houscan AI 서버를 시작합니다...")
+    app.run(host="0.0.0.0", port=5000, debug=True) 

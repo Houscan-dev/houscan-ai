@@ -87,7 +87,7 @@ class RAGChatbot:
             llm=self.llm,
             retriever=self.vectorstore.as_retriever(
                 search_kwargs={
-                    "k": 5,  # 검색할 문서 수 증가
+                    "k": 8,  # 검색할 문서 수 조정
                     "filter": {"filename": pdf_name}  # 특정 PDF 파일만 검색
                 }
             ),
@@ -116,6 +116,9 @@ class RAGChatbot:
             Dict: 응답과 관련 문서 정보를 포함한 딕셔너리
         """
         try:
+            logger.info(f"질문: {query}")
+            logger.info(f"PDF 파일: {self.pdf_name}")
+            
             # 사용자 정보가 필요한 질문인지 확인
             user_info_keywords = [
                 "내가", "저는", "제가", "나의", "저의", "본인", "나", "저",
@@ -127,12 +130,17 @@ class RAGChatbot:
             
             # 시스템 프롬프트 추가
             system_prompt = """당신은 주택 공고문 전문가입니다. 다음 지침을 따라 답변해주세요:
-            1. 공고문의 내용을 정확하게 이해하고 답변하세요.
-            2. 지원 자격 요건은 반드시 공고문에 명시된 내용만 언급하세요.
-            3. 불확실한 내용은 추측하지 말고, 공고문에 명시된 내용만 답변하세요.
-            4. 답변은 간결하고 명확하게 작성하세요.
-            5. 필요한 경우 공고문의 구체적인 내용을 인용하세요.
-            """
+
+1. 공고문의 내용을 바탕으로 최대한 도움이 되는 답변을 제공하세요.
+2. 공고문에 명시된 내용이 있다면 그것을 우선적으로 언급하세요.
+3. 공고문에 직접적인 내용이 없더라도, 관련된 맥락에서 유추할 수 있는 정보는 제공해도 좋습니다.
+4. 답변은 친절하고 이해하기 쉽게 작성하세요.
+5. 모르는 내용은 솔직하게 말하고, 대신 어떤 정보를 더 알아야 하는지 안내해주세요.
+6. 필요한 경우 공고문의 구체적인 내용을 인용하되, 너무 많은 인용은 피하세요.
+7. 사용자의 질문 의도를 최대한 이해하고, 그에 맞는 답변을 제공하세요.
+8. 답변은 간단명료하게 하되, 중요한 정보는 누락하지 마세요.
+
+위 지침을 참고하여 답변해주세요."""
             
             context = system_prompt + "\n\n"
             if needs_user_info and self.user_info:
@@ -161,6 +169,11 @@ class RAGChatbot:
             result = self.qa_chain.invoke({
                 "question": context + query if context else query
             })
+            
+            logger.info(f"검색된 문서 수: {len(result['source_documents'])}")
+            if result['source_documents']:
+                logger.info("첫 번째 검색 문서 내용:")
+                logger.info(result['source_documents'][0].page_content[:200])
             
             # 응답 포맷팅
             response = {

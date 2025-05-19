@@ -27,7 +27,7 @@ except Exception as e:
     raise
 
 # 처리된 문서 폴더 경로
-processed_folder = "./processed_docs"
+processed_folder = "./data/processed"
 if not os.path.exists(processed_folder):
     logger.error(f"처리된 문서 폴더가 존재하지 않습니다: {processed_folder}")
     raise FileNotFoundError(f"처리된 문서 폴더가 존재하지 않습니다: {processed_folder}")
@@ -45,7 +45,7 @@ except Exception as e:
     logger.error(f"ChromaDB 초기화 중 오류 발생: {str(e)}")
     raise
 
-def get_embedding(text, max_length=512):
+def get_embedding(text, max_length=1024):
     """CLS 토큰 벡터 추출 함수"""
     try:
         inputs = tokenizer(
