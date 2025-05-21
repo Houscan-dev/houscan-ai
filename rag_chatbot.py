@@ -126,14 +126,7 @@ class RAGChatbot:
             
             # 응답 포맷팅
             response = {
-                "answer": result["answer"],
-                "sources": [
-                    {
-                        "content": doc.page_content,
-                        "metadata": doc.metadata
-                    }
-                    for doc in result["source_documents"]
-                ]
+                "answer": result["answer"]
             }
             
             return response
@@ -141,8 +134,7 @@ class RAGChatbot:
         except Exception as e:
             logger.error(f"채팅 처리 중 오류 발생: {str(e)}")
             return {
-                "answer": "죄송합니다. 응답을 생성하는 중에 오류가 발생했습니다.",
-                "sources": []
+                "answer": "죄송합니다. 응답을 생성하는 중에 오류가 발생했습니다."
             }
 
 def get_available_pdfs() -> List[str]:
