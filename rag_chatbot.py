@@ -119,10 +119,7 @@ class RAGChatbot:
                 "question": system_prompt + "\n\n질문: " + query
             })
             
-            logger.info(f"검색된 문서 수: {len(result['source_documents'])}")
-            if result['source_documents']:
-                logger.info("첫 번째 검색 문서 내용:")
-                logger.info(result['source_documents'][0].page_content[:200])
+            logger.info(f"답변: {result['answer']}")
             
             # 응답 포맷팅
             response = {
