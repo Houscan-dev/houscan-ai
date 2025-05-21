@@ -41,7 +41,8 @@ class RAGChatbot:
             # LangChain OpenAI 임베딩
             self.embeddings = OpenAIEmbeddings(
                 model="text-embedding-3-large",
-                openai_api_key=openai_api_key
+                openai_api_key=openai_api_key,
+                dimensions=1024
             )
         except Exception as e:
             logger.error(f"임베딩 모델 로딩 중 오류 발생: {str(e)}")
