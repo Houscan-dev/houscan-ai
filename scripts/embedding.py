@@ -1,12 +1,15 @@
 import os
-import torch
 import json
 import chromadb
 from chromadb.config import Settings
-from transformers import AutoTokenizer, AutoModel
 from tqdm import tqdm
 import logging
 from datetime import datetime
+from openai import OpenAI
+from dotenv import load_dotenv
+
+# .env 파일에서 환경변수 로드
+load_dotenv()
 
 # 로깅 설정
 logging.basicConfig(
@@ -15,15 +18,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# 모델 로드
+# OpenAI 클라이언트 초기화
 try:
-    logger.info("모델 로딩 중...")
-    tokenizer = AutoTokenizer.from_pretrained("BAAI/bge-m3")
-    model = AutoModel.from_pretrained("BAAI/bge-m3")
-    model.eval()
-    logger.info("모델 로딩 완료")
+    logger.info("OpenAI 클라이언트 초기화 중...")
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    logger.info("OpenAI 클라이언트 초기화 완료")
 except Exception as e:
-    logger.error(f"모델 로딩 중 오류 발생: {str(e)}")
+    logger.error(f"OpenAI 클라이언트 초기화 중 오류 발생: {str(e)}")
     raise
 
 # 처리된 문서 폴더 경로
@@ -45,20 +46,15 @@ except Exception as e:
     logger.error(f"ChromaDB 초기화 중 오류 발생: {str(e)}")
     raise
 
-def get_embedding(text, max_length=1024):
-    """CLS 토큰 벡터 추출 함수"""
+def get_embedding(text, max_length=8191):
+    """OpenAI API를 통한 임베딩 생성 함수"""
     try:
-        inputs = tokenizer(
-            text, 
-            return_tensors="pt", 
-            truncation=True, 
-            max_length=max_length, 
-            padding=True
+        response = client.embeddings.create(
+            model="text-embedding-3-large",
+            input=text,
+            dimensions=1024  # 선택적 매개변수, 필요에 따라 조정 가능
         )
-        with torch.no_grad():
-            outputs = model(**inputs)
-            embedding = outputs.last_hidden_state[:, 0, :]
-        return embedding.squeeze().tolist()
+        return response.data[0].embedding
     except Exception as e:
         logger.error(f"임베딩 생성 중 오류 발생: {str(e)}")
         return None
