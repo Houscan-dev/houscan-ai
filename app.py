@@ -8,7 +8,14 @@ from datetime import datetime, timedelta
 import threading
 
 app = Flask(__name__)
-CORS(app)
+# CORS 설정 수정
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "https://houscan.store"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
