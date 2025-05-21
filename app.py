@@ -11,9 +11,10 @@ app = Flask(__name__)
 # CORS 설정 수정
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://houscan.store"],
+        "origins": ["http://localhost:3000", "https://www.houscan.kr", "https://houscan.store"],
         "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"],
+        "supports_credentials": True
     }
 })
 
