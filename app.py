@@ -8,12 +8,8 @@ from datetime import datetime, timedelta
 import threading
 
 app = Flask(__name__)
-# CORS 설정 - 모든 도메인 허용, credentials 없이
-CORS(app, 
-     origins="*", 
-     supports_credentials=False,
-     allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
-     methods=["GET", "POST", "OPTIONS"])
+# CORS 설정 제거 - 아래 줄을 주석 처리하거나 삭제
+# CORS(app, origins="*", supports_credentials=False, allow_headers=["Content-Type", "Authorization", "X-Requested-With"], methods=["GET", "POST", "OPTIONS"])
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
