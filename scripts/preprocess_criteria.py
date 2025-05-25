@@ -4,45 +4,16 @@ import datetime
 import re
 import chromadb
 from chromadb.config import Settings
-# BAAI/bge-m3 임베딩 생성을 위해 transformers 필요
-from transformers import AutoTokenizer, AutoModel
 import time
 from dotenv import load_dotenv # .env 파일 로드
 import logging
 import openai # OpenAI 라이브러리 임포트
-import torch # 임베딩 모델 사용 위해 추가
 
 # .env 파일 로드 (스크립트 시작 시점에 호출)
 load_dotenv()
 
 # --- 로깅 설정 ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-# --- 임베딩 모델 및 토크나이저 로드 ---
-# Semantic Search를 위해 임베딩 생성 함수가 필요하므로 로드합니다.
-try:
-    embedding_tokenizer = AutoTokenizer.from_pretrained("BAAI/bge-m3")
-    embedding_model = AutoModel.from_pretrained("BAAI/bge-m3")
-    # GPU 사용 설정 (임베딩 모델용)
-    if torch.cuda.is_available():
-        embedding_model.to("cuda")
-        logging.info("Embedding model moved to GPU.")
-    else:
-        logging.info("CUDA not available for embedding model, running on CPU.")
-    embedding_model.eval()
-    logging.info("Embedding model and tokenizer loaded successfully.")
-except Exception as e:
-    logging.error(f"Error loading embedding model/tokenizer: {e}", exc_info=True)
-    exit()
-
-# ChromaDB 클라이언트 설정
-try:
-    chroma_client = chromadb.PersistentClient(path="./chroma_db")
-    collection = chroma_client.get_or_create_collection(name="processed_chunks")
-    logging.info("ChromaDB client connected and collection retrieved.")
-except Exception as e:
-    logging.error(f"Error connecting to ChromaDB: {e}", exc_info=True)
-    exit()
 
 # --- OpenAI API 설정 ---
 try:
@@ -56,62 +27,64 @@ except Exception as e:
     logging.error("Please ensure the 'openai' library is installed and the OPENAI_API_KEY environment variable is set correctly in .env file.")
     exit()
 
-# --- GPT 모델 선택 ---
-GPT_MODEL_NAME = "gpt-3.5-turbo" # 또는 "gpt-4-turbo" 등
-logging.info(f"Using GPT model: {GPT_MODEL_NAME}")
+# ChromaDB 클라이언트 설정
+try:
+    chroma_client = chromadb.PersistentClient(path="./chroma_db")
+    collection = chroma_client.get_or_create_collection(name="processed_chunks")
+    logging.info("ChromaDB client connected and collection retrieved.")
+except Exception as e:
+    logging.error(f"Error connecting to ChromaDB: {e}", exc_info=True)
+    exit()
 
+# --- 모델 선택 ---
+GPT_MODEL_NAME = "gpt-4-turbo"
+EMBEDDING_MODEL_NAME = "text-embedding-3-large"
+logging.info(f"Using GPT model: {GPT_MODEL_NAME}")
+logging.info(f"Using Embedding model: {EMBEDDING_MODEL_NAME}")
 
 # --- Helper 함수 ---
 
 def get_embedding(text):
-    """텍스트 임베딩 생성 (BAAI/bge-m3 사용)"""
+    """텍스트 임베딩 생성 (OpenAI text-embedding-3-large 사용)"""
     try:
-        inputs = embedding_tokenizer(text, return_tensors="pt", truncation=True, max_length=512, padding=True)
-        device = embedding_model.device # 모델이 로드된 디바이스 확인
-        inputs = {k: v.to(device) for k, v in inputs.items()}
-
-        with torch.no_grad():
-            outputs = embedding_model(**inputs)
-            embedding = outputs.last_hidden_state[:, 0, :] # CLS 토큰 사용
-        return embedding.cpu().squeeze().tolist() # CPU로 이동 후 리스트 변환
+        response = client.embeddings.create(
+            model=EMBEDDING_MODEL_NAME,
+            input=text,
+            encoding_format="float",
+            dimensions=1024
+        )
+        return response.data[0].embedding
     except Exception as e:
         logging.error(f"Error generating embedding for text: '{text[:100]}...': {e}", exc_info=True)
         return None
 
-def generate_gpt_response(context, max_tokens=1024):
-    """ OpenAI GPT API를 사용하여 응답 생성 (JSON 형식 추출 유도) """
+def generate_gpt_response(context, max_tokens=4096):
+    """ OpenAI GPT API를 사용하여 응답 생성 (서술형 텍스트 추출) """
     logging.info(f"--- Function generate_gpt_response entered ---")
     if not context:
         logging.warning("Context is empty, cannot generate GPT response.")
         return None
 
-    system_prompt = "You are a helpful assistant designed to extract specific information from Korean housing announcement documents and output it strictly as a JSON object."
-    user_prompt = f"""다음은 주택 입주자 모집 공고문의 일부 내용입니다. 이 내용을 바탕으로 청년 신청자의 주요 입주 자격 요건을 추출하여 **반드시 JSON 객체 형식**으로만 응답해주세요. 각 항목의 값이 명시적으로 언급되지 않았다면 null을 사용하세요. JSON 객체 외의 설명이나 다른 텍스트는 절대 포함하지 마세요.
+    system_prompt = "당신은 주택 입주자 모집 공고문을 분석하여 청년 신청자의 자격요건을 명확하고 일관된 형식으로 정리하는 전문가입니다. 반드시 '~습니다' 문체를 사용해주세요."
+    user_prompt = f"""아래는 주택 입주자 모집 공고문에서 청년 신청자의 자격요건을 추출하여 정리하는 작업입니다. 
+예시와 같은 형식과 스타일로 자격요건을 정리해주세요.
 
-요구 항목:
-- "age_min": 최소 나이 (만 나이 기준, 정수)
-- "age_max": 최대 나이 (만 나이 기준, 정수)
-- "gender_restriction": 성별 제한 (null: 제한 없음, "남성": 남성만, "여성": 여성만)
-- "marital_status": 혼인 상태 (null: 제한 없음, "미혼": 미혼만, "기혼": 기혼만)
-- "university_status": 대학 재학 상태 (null: 제한 없음, "재학": 재학 중만, "졸업": 졸업자만)
-- "recent_graduate": 최근 졸업자 여부 (null: 제한 없음, true: 최근 졸업자만)
-- "employment_status": 고용 상태 (null: 제한 없음, "재직": 재직자만, "미취업": 미취업자만)
-- "job_seeking": 구직 활동 여부 (null: 제한 없음, true: 구직 중만)
-- "household_type": 세대 유형 (null: 제한 없음, "일반": 일반 가구, "기초생활수급": 기초생활수급자, "한부모": 한부모 가구 등)
-- "parents_own_house": 부모 주택 보유 여부 (null: 제한 없음, false: 부모 주택 미보유만)
-- "disability_in_family": 가족 내 장애인 여부 (null: 제한 없음, true: 장애인 가구만)
-- "application_count": 이전 신청 횟수 제한 (null: 제한 없음, 정수: 최대 신청 횟수)
-- "total_asset_limit_won": 총자산 기준(총자산가액) (세대 기준, 원 단위, 정수)
-- "car_asset_limit_won": 자동차 기준(자동차가액) (세대 기준, 원 단위, 정수)
-- "must_be_homeless": 무주택 요건 (세대 기준, 불리언)
-- "income_limit_percent": 소득 기준 (전년도 도시근로자 월평균소득 대비 비율, 정수, 예: 100)
+[예시 공고문]
+주택공급신청자는 입주자모집공고일 현재 무주택자(본인)이며 미혼 상태여야 하며, 청년, 취업준비생, 대학생으로서 신청소득, 총자산, 자동차가액 기준을 충족해야 합니다. 무주택 요건 충족은 본인에 한하며 관련 규정에 따라 판단됩니다. 고졸자, 외국인, 재외국민은 신청이 불가합니다. 1인 1주택만 신청 가능하며, 중복 신청 시 전부 무효 처리됩니다. 입주자 모집공고일부터 계약 시까지 자격을 유지해야 하며, 당첨 후라도 자격요건 미달 시 계약이 취소될 수 있습니다. 부적격사유에 대한 소명 의무는 신청자에게 있습니다.
 
-[공고문 내용 시작]
+신청유형은 ① 대학생(서울특별시 소재 대학교 재학 중인 자), ② 취업준비생(졸업 또는 중퇴 후 미취업 상태로 취업준비 중인 자), ③ 청년(만 19세 이상 ~ 39세 이하) 중 하나를 선택해야 하며, 순위에 따라 자격이 나뉩니다.
+
+1순위는 생계·의료·주거급여 수급자 가구, 한부모 가족, 차상위계층 가구이며, 2순위는 일반(도시근로자 월평균소득 100% 이하 및 자산 기준 충족)입니다. 3순위는 1, 2순위에 해당하지 않지만 소득 기준 충족자이며, 자산 기준은 완화되어 있습니다. 가구원 범위는 본인과 부모를 포함하고, 3순위 단독세대주는 본인만 포함됩니다.
+
+자산 기준은 2순위의 경우 총자산 2억 8,800만 원 이하, 자동차 2,468만 원 이하이며, 3순위는 총자산 2억 3,700만 원 이하, 자동차 2,468만 원 이하입니다. 소득 기준은 1인 가구 기준 50% 이하 1,322,574원, 100% 이하 2,645,147원 등으로 가구원 수에 따라 상이합니다.
+
+[예시 응답]
+주택공급신청자는 입주자모집공고일 현재 무주택자(본인)이며 미혼 상태여야 하며, 청년, 취업준비생, 대학생으로서 신청소득, 총자산, 자동차가액 기준을 충족해야 합니다. 신청유형은 ① 대학생(서울특별시 소재 대학교 재학 중인 자), ② 취업준비생(졸업 또는 중퇴 후 미취업 상태로 취업준비 중인 자), ③ 청년(만 19세 이상 ~ 39세 이하) 중 하나를 선택해야 하며, 순위에 따라 자격이 나뉩니다. 1순위는 생계·의료·주거급여 수급자 가구, 한부모 가족, 차상위계층 가구이며, 2순위는 일반(도시근로자 월평균소득 100% 이하 및 자산 기준 충족)입니다. 3순위는 1, 2순위에 해당하지 않지만 소득 기준 충족자이며, 자산 기준은 완화되어 있습니다. 가구원 범위는 본인과 부모를 포함하고, 3순위 단독세대주는 본인만 포함됩니다. 자산 기준은 2순위의 경우 총자산 2억 8,800만 원 이하, 자동차 2,468만 원 이하이며, 3순위는 총자산 2억 3,700만 원 이하, 자동차 2,468만 원 이하입니다. 소득 기준은 1인 가구 기준 50% 이하 1,322,574원, 100% 이하 2,645,147원 등으로 가구원 수에 따라 상이합니다. 무주택 요건 충족은 본인에 한하며 관련 규정에 따라 판단됩니다. 고졸자, 외국인, 재외국민은 신청이 불가합니다. 1인 1주택만 신청 가능하며, 중복 신청 시 전부 무효 처리됩니다.
+
+[새로운 공고문]
 {context}
-[공고문 내용 끝]
 
-JSON 응답:
-"""
+위 공고문의 자격요건을 예시 응답과 같은 형식과 문체로 작성해주세요."""
 
     logging.info("Sending request to OpenAI API...")
     start_time = time.time()
@@ -124,8 +97,7 @@ JSON 응답:
                 {"role": "user", "content": user_prompt}
             ],
             temperature=0.1,
-            max_tokens=max_tokens,
-            response_format={"type": "json_object"}
+            max_tokens=max_tokens
         )
         response_content = response.choices[0].message.content
         end_time = time.time()
@@ -169,20 +141,19 @@ def parse_gpt_json_output(gpt_response_content):
 
 # --- 메인 처리 함수 ---
 
-def extract_and_save_criteria_for_pdf(pdf_name, output_dir="extracted_criteria_gpt"):
+def extract_and_save_criteria_for_pdf(pdf_name, output_dir="criteria3"):
     """
-    특정 PDF의 자격 요건을 (의미 검색 + GPT API)로 추출하여 JSON 파일로 저장
+    특정 PDF의 자격 요건을 (의미 검색 + GPT API)로 추출하여 텍스트 파일로 저장
     """
     logging.info(f"--- Function extract_and_save_criteria_for_pdf entered for {pdf_name} ---")
 
     # 1. 의미 검색으로 관련 청크 가져오기
     search_queries = [
-        "청년 주택 입주 자격 요건",
-        "소득 기준 및 자산 기준",
-        "무주택 세대구성원 요건",
-        "나이 제한 및 혼인 상태"
+        "신청자격",
+        "자격요건",
+        "모집자격"
     ]
-    n_results_to_fetch = 5  # 각 쿼리당 5개 결과만 가져오기
+    n_results_to_fetch = 10  # 각 쿼리당 10개 결과만 가져오기
 
     logging.info(f"Performing semantic search for multiple queries within {pdf_name}...")
     context_text = ""  # 컨텍스트 초기화
@@ -233,15 +204,10 @@ def extract_and_save_criteria_for_pdf(pdf_name, output_dir="extracted_criteria_g
         logging.error(f"Error during semantic search for {pdf_name}: {e}", exc_info=True)
         return False
 
-    # 2. GPT API 호출 및 파싱
-    gpt_response_content = generate_gpt_response(context_text)
-    if not gpt_response_content:
+    # 2. GPT API 호출
+    gpt_response = generate_gpt_response(context_text)
+    if not gpt_response:
         logging.error(f"Failed to get response from GPT API for {pdf_name}")
-        return False
-
-    extracted_criteria = parse_gpt_json_output(gpt_response_content)
-    if not extracted_criteria:
-        logging.error(f"Failed to parse criteria using GPT API for {pdf_name}")
         return False
 
     # 3. 파일로 저장
@@ -251,14 +217,15 @@ def extract_and_save_criteria_for_pdf(pdf_name, output_dir="extracted_criteria_g
         safe_base_filename = re.sub(r'[^\w\-]+', '_', base_filename)
         output_filename = os.path.join(output_dir, f"{safe_base_filename}_criteria.json")
 
+        # 텍스트 형식으로 저장
         with open(output_filename, 'w', encoding='utf-8') as f:
-            json.dump(extracted_criteria, f, ensure_ascii=False, indent=2)
+            f.write(gpt_response)
 
         logging.info(f"Successfully saved criteria for {pdf_name} to {output_filename}")
         return True
 
     except Exception as e:
-        logging.error(f"Error saving criteria JSON for {pdf_name}: {e}", exc_info=True)
+        logging.error(f"Error saving criteria for {pdf_name}: {e}", exc_info=True)
         return False
 
 # --- 메인 실행 부분 (모든 공고 처리) ---
@@ -282,7 +249,7 @@ if __name__ == "__main__":
     for pdf_name in unique_filenames:
         logging.info(f"Processing PDF: {pdf_name}")
         try:
-            success = extract_and_save_criteria_for_pdf(pdf_name, output_dir="./extracted_criteria_gpt")
+            success = extract_and_save_criteria_for_pdf(pdf_name, output_dir="criteria3")
             if success:
                 success_count += 1
             else:
