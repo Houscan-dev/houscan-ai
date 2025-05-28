@@ -19,45 +19,5 @@
       ]
     }
   ],
-  "score_items": [
-    {
-      "priority": "1순위",
-      "items": [
-        {
-          "item": "신청자 나이",
-          "score": "3"
-        },
-        {
-          "item": "거주지 및 거주기간",
-          "score": "3"
-        }
-      ]
-    },
-    {
-      "priority": "2순위",
-      "items": [
-        {
-          "item": "신청자 나이",
-          "score": "2"
-        },
-        {
-          "item": "거주지 및 거주기간",
-          "score": "2"
-        }
-      ]
-    },
-    {
-      "priority": "3순위",
-      "items": [
-        {
-          "item": "신청자 나이",
-          "score": "1"
-        },
-        {
-          "item": "거주지 및 거주기간",
-          "score": "1"
-        }
-      ]
-    }
-  ]
+  "score_items": null
 }

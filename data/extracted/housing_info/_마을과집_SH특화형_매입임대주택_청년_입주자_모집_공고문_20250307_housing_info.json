@@ -1,14 +1,15 @@
 {
   "housing_info": [
     {
-      "name": "특화형  매입 임대주택",
-      "address": "서울특별시 중구 명동10길 35-4 전진상 교육관 內(내) 마을과집",
+      "name": "서영스윗홈",
+      "address": "서울특별시 구로구 남부순환로105나길 24(가리봉동134-22)",
+      "district": "구로구",
       "total_households": null,
-      "supply_households": null,
-      "type": "매입 임대",
-      "house_type": null,
-      "elevator": null,
-      "parking": null
+      "supply_households": "1호",
+      "type": "2룸",
+      "house_type": "48.89㎡",
+      "elevator": false,
+      "parking": "지상 1층"
     }
   ]
 }

@@ -1,11 +1,12 @@
 {
   "housing_info": [
     {
-      "name": "서울특별시 은평구 진흥로1길 13-11",
-      "address": "역촌동 39-35",
+      "name": "서울특별시 은평구 진흥로1길 13-11 (역촌동 39-35)",
+      "address": "서울특별시 은평구 진흥로1길 13-11 (역촌동 39-35)",
+      "district": "은평구",
       "total_households": null,
-      "supply_households": 1,
-      "type": "매입임대",
+      "supply_households": "1호",
+      "type": "청년 1인 단독거주",
       "house_type": "26.02㎡",
       "elevator": true,
       "parking": null

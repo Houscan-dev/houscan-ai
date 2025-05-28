@@ -1,43 +1,69 @@
 {
   "housing_info": [
     {
-      "name": "신혼Ⅰ",
-      "address": null,
-      "total_households": "17",
-      "supply_households": "17",
-      "type": "신혼부부",
-      "house_type": "B",
-      "elevator": false,
-      "parking": "31,560"
-    },
-    {
-      "name": "청년",
-      "address": null,
-      "total_households": "6",
-      "supply_households": "6",
-      "type": "청년",
-      "house_type": "A",
-      "elevator": false,
-      "parking": "52,600"
-    },
-    {
-      "name": null,
-      "address": null,
-      "total_households": "25",
-      "supply_households": "25",
-      "type": "청년",
-      "house_type": "B",
-      "elevator": true,
-      "parking": "57,800"
-    },
-    {
-      "name": null,
-      "address": null,
-      "total_households": "20",
-      "supply_households": "20",
+      "name": "중앙 라온 프라이빗",
+      "address": "성북구 종암동 83-3",
+      "district": "성북구",
+      "total_households": null,
+      "supply_households": "78호",
       "type": null,
-      "house_type": "A B B",
-      "elevator": true,
+      "house_type": "21㎡, 23A, 23B, 29㎡, 36㎡, 45㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "골드타워",
+      "address": "동작구 신대방동 351-5",
+      "district": "동작구",
+      "total_households": null,
+      "supply_households": "99호",
+      "type": null,
+      "house_type": "19㎡, 27㎡, 36A, 36B, 40E(셰어형)",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "성북 펠리스",
+      "address": "성북구 하월곡동 88-222",
+      "district": "성북구",
+      "total_households": null,
+      "supply_households": "59호",
+      "type": null,
+      "house_type": "16㎡, 20㎡, 37㎡, 38㎡, 39㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "한영 스테이",
+      "address": "성북구 마장동 783-5",
+      "district": "성북구",
+      "total_households": null,
+      "supply_households": "50호",
+      "type": null,
+      "house_type": "18A, 18B, 18C, 18D, 22㎡, 45㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "장안동 하트리움",
+      "address": "동대문구 장안동 465-4",
+      "district": "동대문구",
+      "total_households": null,
+      "supply_households": "139호",
+      "type": null,
+      "house_type": "18A, 18B, 18D, 20㎡, 36E, 36F",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "센티스퀘어 발산",
+      "address": "강서구 내발산동 647-1",
+      "district": "강서구",
+      "total_households": null,
+      "supply_households": "258",
+      "type": null,
+      "house_type": "19㎡, 22㎡, 32㎡, 36㎡, 39㎡, 41㎡, 43㎡, 48㎡",
+      "elevator": null,
       "parking": null
     }
   ]

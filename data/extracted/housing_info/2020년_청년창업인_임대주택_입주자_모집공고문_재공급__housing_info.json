@@ -1,13 +1,25 @@
 {
   "housing_info": [
     {
-      "name": "동북권세대융합 형 복합시설",
-      "address": "서울시",
+      "name": "세대융합형 복합시설내 청년창업인 주택",
+      "address": null,
+      "district": null,
       "total_households": null,
-      "supply_households": null,
-      "type": null,
-      "house_type": null,
-      "elevator": false,
+      "supply_households": "10호",
+      "type": "임대주택",
+      "house_type": "15㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "세대융합형 복합시설내 청년음악인 주택",
+      "address": null,
+      "district": null,
+      "total_households": null,
+      "supply_households": "13호",
+      "type": "임대주택",
+      "house_type": "15㎡",
+      "elevator": null,
       "parking": null
     }
   ]

@@ -12,7 +12,7 @@
     "start": "2025.03",
     "end": "2025.03"
   },
-  "winner_announcement": "2025.05.03 00:00",
+  "winner_announcement": null,
   "contract_period": {
     "start": null,
     "end": null

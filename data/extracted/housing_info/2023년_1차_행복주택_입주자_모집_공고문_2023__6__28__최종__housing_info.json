@@ -1,14 +1,59 @@
 {
   "housing_info": [
     {
-      "name": "더 더블유 서울",
-      "address": "null",
-      "total_households": "null",
-      "supply_households": "null",
-      "type": "null",
-      "house_type": "null",
-      "elevator": false,
-      "parking": "기계식 주차장만 이용 가능, 일부 차종 주차 불가능"
+      "name": "DMC SK뷰 아이파크포레",
+      "address": "06336 서울특별시 은평구 개포로 621(개포동 14-5)",
+      "district": "은평구",
+      "total_households": "20",
+      "supply_households": "10",
+      "type": "신혼부부",
+      "house_type": "39㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "DMC SK뷰 아이파크포레",
+      "address": "06336 서울특별시 은평구 개포로 621(개포동 14-5)",
+      "district": "은평구",
+      "total_households": "10",
+      "supply_households": "5",
+      "type": "고령자",
+      "house_type": "39㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "(수색13)",
+      "address": "06336 서울특별시 은평구 개포로 621(개포동 14-5)",
+      "district": "은평구",
+      "total_households": "15",
+      "supply_households": "8",
+      "type": "신혼부부",
+      "house_type": "49㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "(수색13)",
+      "address": "06336 서울특별시 은평구 개포로 621(개포동 14-5)",
+      "district": "은평구",
+      "total_households": "6",
+      "supply_households": "3",
+      "type": "고령자",
+      "house_type": "49㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": null,
+      "address": "06336 서울특별시 은평구 개포로 621(개포동 14-5)",
+      "district": "은평구",
+      "total_households": "19",
+      "supply_households": "10",
+      "type": "신혼부부",
+      "house_type": "53㎡",
+      "elevator": null,
+      "parking": null
     }
   ]
 }

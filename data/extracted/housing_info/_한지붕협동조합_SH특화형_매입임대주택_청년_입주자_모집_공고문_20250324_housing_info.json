@@ -2,13 +2,14 @@
   "housing_info": [
     {
       "name": "소담빌라",
-      "address": "서울특별시 금천구 시흥대로88길 18, 소담빌라 (독산동 1068-16)",
+      "address": "서울특별시 금천구 시흥대로88길 18",
+      "district": "금천구",
       "total_households": null,
-      "supply_households": 1,
-      "type": null,
+      "supply_households": "1",
+      "type": "청년 1인 단독거주",
       "house_type": "36.59㎡",
       "elevator": true,
-      "parking": "지상5층 (엘리베이터 있음)"
+      "parking": null
     }
   ]
 }

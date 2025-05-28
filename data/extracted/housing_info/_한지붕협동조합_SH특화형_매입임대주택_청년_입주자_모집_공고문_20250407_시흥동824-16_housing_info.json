@@ -2,13 +2,14 @@
   "housing_info": [
     {
       "name": "은행나무",
-      "address": "서울특별시 금천구 독산로22길 65, 은행나무 (시흥동 824-16)",
+      "address": "서울특별시 금천구 독산로22길 65, 시흥동 824-16",
+      "district": "금천구",
       "total_households": null,
       "supply_households": "1호",
-      "type": null,
-      "house_type": "60.00㎡",
+      "type": "청년 1인 단독거주",
+      "house_type": "60㎡",
       "elevator": true,
-      "parking": "수 지상5층 (엘리베이터 있음)"
+      "parking": null
     }
   ]
 }

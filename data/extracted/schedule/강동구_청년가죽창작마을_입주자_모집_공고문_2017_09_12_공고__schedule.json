@@ -5,21 +5,21 @@
     "end": "2017.09.29"
   },
   "document_submission_period": {
-    "start": null,
-    "end": null
+    "start": "2017.09.18",
+    "end": "2017.09.29"
   },
   "inspection_period": {
     "start": null,
     "end": null
   },
-  "winner_announcement": "2017.11.15 12:00",
+  "winner_announcement": "2017.11.15",
   "contract_period": {
-    "start": null,
-    "end": null
+    "start": "2017.12",
+    "end": "2017.12"
   },
   "payment_period": {
-    "start": null,
-    "end": null
+    "start": "2017.12",
+    "end": "2017.12"
   },
   "move_in_period": {
     "start": "2017.12.01",

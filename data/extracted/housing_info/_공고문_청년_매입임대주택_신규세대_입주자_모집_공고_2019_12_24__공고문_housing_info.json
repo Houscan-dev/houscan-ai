@@ -1,10 +1,33 @@
 {
   "housing_info": [
     {
-      "name": "다가구 신규 매입주택",
-      "address": null,
-      "total_households": "59실",
-      "supply_households": "59호",
+      "name": "천호동 237-27",
+      "address": "천호동 237-27",
+      "district": "강동구",
+      "total_households": null,
+      "supply_households": "16호",
+      "type": "다가구 단독거주형",
+      "house_type": null,
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "자양동 218-9",
+      "address": "자양동 218-9",
+      "district": "광진구",
+      "total_households": null,
+      "supply_households": "17호",
+      "type": "다가구 단독거주형",
+      "house_type": null,
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "시흥동 849-32,33",
+      "address": "시흥동 849-32,33",
+      "district": "금천구",
+      "total_households": null,
+      "supply_households": "26호",
       "type": "다가구 단독거주형",
       "house_type": null,
       "elevator": null,

@@ -1,34 +1,70 @@
 {
   "housing_info": [
     {
+      "name": "아임2030",
+      "address": "강서구 등촌동 648-5",
+      "district": "강서구",
+      "total_households": null,
+      "supply_households": "18호",
+      "type": null,
+      "house_type": "15㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "센터스퀘어 등촌",
+      "address": "강서구 염창동 274-17",
+      "district": "강서구",
+      "total_households": null,
+      "supply_households": "49호",
+      "type": null,
+      "house_type": "18㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "더클래식 동작",
+      "address": "동작구 노량진동 37-1",
+      "district": "동작구",
+      "total_households": null,
+      "supply_households": "32호",
+      "type": null,
+      "house_type": "16㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
       "name": "옥산그린타워",
       "address": "광진구 구의동 587-64",
+      "district": "광진구",
       "total_households": null,
-      "supply_households": 2,
+      "supply_households": "2호",
       "type": null,
-      "house_type": "32A",
-      "elevator": false,
-      "parking": "자주식:282대 (장애인주차대수:9대)"
+      "house_type": "32A, 32B(셰어형)",
+      "elevator": null,
+      "parking": null
     },
     {
-      "name": "어바니엘위드더스타일",
+      "name": "어바니엘 위드 더 스타일 충정로",
       "address": "서대문구 충정로3가 480",
+      "district": "서대문구",
       "total_households": null,
-      "supply_households": 11,
+      "supply_households": "11호",
       "type": null,
-      "house_type": "35A",
-      "elevator": false,
-      "parking": "자주식:282대 (장애인주차대수:9대)"
+      "house_type": "35A, 35B",
+      "elevator": null,
+      "parking": null
     },
     {
-      "name": "서교동효성해링턴타워",
+      "name": "서교동 효성 해링턴 타워",
       "address": "마포구 서교동 494",
+      "district": "마포구",
       "total_households": null,
-      "supply_households": 20,
+      "supply_households": "20호",
       "type": null,
       "house_type": "37B (셰어형)",
-      "elevator": false,
-      "parking": "자주식:282대 (장애인주차대수:9대)"
+      "elevator": null,
+      "parking": null
     }
   ]
 }

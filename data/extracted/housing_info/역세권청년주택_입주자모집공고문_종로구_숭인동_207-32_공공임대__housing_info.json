@@ -1,74 +1,81 @@
 {
   "housing_info": [
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "16㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     },
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "18A㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     },
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "18B㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     },
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "20㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     },
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "21㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     },
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "22㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     },
     {
-      "name": "숭인동 주택",
+      "name": "종로구숭인동 207-32",
       "address": "종로구숭인동 207-32",
-      "total_households": null,
-      "supply_households": 31,
-      "type": "공공 임대",
+      "district": "종로구",
+      "total_households": "31호",
+      "supply_households": "31호",
+      "type": "역세권 청년주택",
       "house_type": "41㎡",
-      "elevator": false,
-      "parking": "개별 난방"
+      "elevator": true,
+      "parking": "총 60대(기계식 : 58대, 자주식(장애인) : 2대, 나눔카 : 6대 포함)"
     }
   ]
 }

@@ -5,8 +5,6 @@ import logging
 from typing import List, Dict, Any
 
 import chromadb
-from transformers import AutoTokenizer, AutoModel
-import torch
 import openai
 from dotenv import load_dotenv
 import time
@@ -15,27 +13,25 @@ import time
 load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-embedding_tokenizer = AutoTokenizer.from_pretrained("BAAI/bge-m3")
-embedding_model = AutoModel.from_pretrained("BAAI/bge-m3")
-if torch.cuda.is_available():
-    embedding_model.to("cuda")
-embedding_model.eval()
+openai.api_key = os.getenv("OPENAI_API_KEY")
+client = openai.OpenAI()
+GPT_MODEL_NAME = "gpt-4-turbo"
+EMBEDDING_MODEL_NAME = "text-embedding-3-large"
 
 chroma_client = chromadb.PersistentClient(path="./chroma_db")
 collection = chroma_client.get_or_create_collection(name="processed_chunks")
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
-client = openai.OpenAI()
-GPT_MODEL_NAME = "gpt-3.5-turbo"
-
 def get_embedding(text):
-    inputs = embedding_tokenizer(text, return_tensors="pt", truncation=True, max_length=512, padding=True)
-    device = embedding_model.device
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-    with torch.no_grad():
-        outputs = embedding_model(**inputs)
-        embedding = outputs.last_hidden_state[:, 0, :]
-    return embedding.cpu().squeeze().tolist()
+    try:
+        response = client.embeddings.create(
+            model=EMBEDDING_MODEL_NAME,
+            input=text,
+            dimensions=1024
+        )
+        return response.data[0].embedding
+    except Exception as e:
+        logging.error(f"임베딩 생성 중 오류 발생: {e}")
+        return None
 
 def generate_gpt_response_housing_info(context, max_tokens=2048):
     system_prompt = "You are a helpful assistant designed to extract specific information from Korean housing announcement documents and output it strictly as a JSON object. You must ensure all strings are properly escaped and the JSON is valid. Keep the response concise and focused on essential housing information only."
@@ -47,6 +43,7 @@ def generate_gpt_response_housing_info(context, max_tokens=2048):
 2. 각 주택 정보는 다음 필드를 포함해야 합니다:
    - name: 주택명
    - address: 주소
+   - district: 자치구 (예: 강남구, 송파구 등)
    - total_households: 총 세대수
    - supply_households: 공급호수
    - type: 유형 (예: 매입임대, 공공임대 등)
@@ -63,6 +60,7 @@ JSON 형식:
         {{
             "name": "주택명",
             "address": "주소",
+            "district": "자치구",
             "total_households": "총 세대수",
             "supply_households": "공급호수",
             "type": "유형",
@@ -147,7 +145,11 @@ def parse_gpt_json_output(gpt_response_content):
 def extract_housing_info_for_pdf(pdf_name, output_dir="extracted_housing_info"):
     # 공급주택 정보가 있는 섹션의 제목들
     section_titles = [
-        "공급주택", "공급현황", "주택정보", "주택현황", "주택", "공급"
+        "공급주택", "공급현황", "주택정보", "주택현황", "주택", "공급",
+        "공급대상", "공급세대", "공급규모", "공급호수", "세대현황",
+        "임대주택", "임대조건", "주택공급", "주택유형", "주택규모",
+        "건설위치", "공급내역", "공급호실", "세대수", "공급대상주택",
+        "주택개요", "주택단지", "단지개요", "단지현황", "공급내용"
     ]
     
     context_text = ""

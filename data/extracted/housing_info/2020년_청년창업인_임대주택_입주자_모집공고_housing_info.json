@@ -1,12 +1,13 @@
 {
   "housing_info": [
     {
-      "name": "동북권세대융합 형 복합시설 內 주거지원시설",
+      "name": "세대융합형 복합시설내 청년창업인 주택",
       "address": null,
+      "district": null,
       "total_households": null,
-      "supply_households": null,
-      "type": null,
-      "house_type": null,
+      "supply_households": "24호",
+      "type": "창업지원 (청년창업)",
+      "house_type": "15㎡, 23㎡",
       "elevator": null,
       "parking": null
     }

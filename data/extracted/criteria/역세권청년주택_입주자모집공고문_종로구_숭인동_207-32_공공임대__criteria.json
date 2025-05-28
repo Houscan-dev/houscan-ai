@@ -1,18 +1,3 @@
 {
-  "age_min": 19,
-  "age_max": 39,
-  "gender_restriction": null,
-  "marital_status": "미혼",
-  "university_status": "재학",
-  "recent_graduate": null,
-  "employment_status": null,
-  "job_seeking": null,
-  "household_type": null,
-  "parents_own_house": null,
-  "disability_in_family": null,
-  "application_count": null,
-  "total_asset_limit_won": 75000000,
-  "car_asset_limit_won": null,
-  "must_be_homeless": true,
-  "income_limit_percent": 100
+  "content": "입주자모집공고일(2019년 11월 15일) 기준 무주택자이며, 대학생은 대학에 재학 중이거나 다음 학기에 입학 또는 복학 예정이거나 졸업유예자 중 하나에 해당해야 하고, 취업준비생은 대학 또는 고등학교를 졸업하거나 중퇴한 지 2년 이내여야 합니다. 또한 만 19세 이상 만 39세 이하(출생일 1979년 11월 16일부터 2000년 11월 15일 사이)이며, 혼인 중이 아니고, 신청자 본인 및 부모의 월평균 소득 합계가 전년도 도시근로자 가구당 월평균소득의 100%(가구원 3인 이하 기준 5,401,814원) 이하이어야 하며, 이혼 등으로 가족관계가 단절된 경우 실질적으로 부양의무를 이행하는 부 또는 모의 소득만 조회합니다. 마지막으로 신청자 본인의 총 자산가액이 7,500만 원 이하이고 자동차를 소유하고 있지 않아야 합니다."
 }

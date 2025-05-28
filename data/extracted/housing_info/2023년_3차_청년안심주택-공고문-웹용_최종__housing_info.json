@@ -1,84 +1,59 @@
 {
   "housing_info": [
     {
-      "name": "청계로벤하임",
-      "address": "종로구 숭인동240-1",
+      "name": "동작구 사당동 1044-1",
+      "address": "서울특별시 동작구 사당동 1044-1",
+      "district": "동작구",
       "total_households": null,
-      "supply_households": 39,
+      "supply_households": "22호",
       "type": null,
-      "house_type": "39.29㎡",
-      "elevator": false,
-      "parking": "73.11㎡"
+      "house_type": "18A, 18B, 18C, 21㎡, 36㎡, 37㎡",
+      "elevator": null,
+      "parking": null
     },
     {
-      "name": "중구광희동1가",
-      "address": "166",
+      "name": "문정역 마에스트로",
+      "address": "서울특별시 송파구 문정동 55-6",
+      "district": "송파구",
       "total_households": null,
-      "supply_households": 15,
+      "supply_households": "153호",
       "type": null,
-      "house_type": "15.51㎡",
-      "elevator": false,
-      "parking": "30.68㎡"
+      "house_type": "16㎡, 20㎡, 26A, 26B, 29㎡, 30㎡, 31㎡, 33㎡, 34㎡, 35㎡",
+      "elevator": null,
+      "parking": null
     },
     {
-      "name": "호반베르디움스테이원",
-      "address": null,
-      "total_households": 67,
-      "supply_households": 36,
-      "type": null,
-      "house_type": "36.22㎡",
-      "elevator": false,
-      "parking": "86.34㎡"
-    },
-    {
-      "name": "은평구대조동241",
-      "address": null,
-      "total_households": 67,
-      "supply_households": 36,
-      "type": null,
-      "house_type": "36.24㎡",
-      "elevator": false,
-      "parking": "86.32㎡"
-    },
-    {
-      "name": "강서구등촌동671-1",
-      "address": null,
+      "name": "연신내역 루체스테이션",
+      "address": "서울특별시 은평구 불광동 323-21",
+      "district": "은평구",
       "total_households": null,
-      "supply_households": 18,
-      "type": "청년",
-      "house_type": "91.8㎡",
-      "elevator": true,
-      "parking": "73.44㎡"
-    },
-    {
-      "name": "비바힐스강변",
-      "address": null,
-      "total_households": 32,
-      "supply_households": 1,
-      "type": "청년",
-      "house_type": "48.24㎡",
-      "elevator": true,
-      "parking": "38.592㎡"
-    },
-    {
-      "name": "광진구구의동593-11",
-      "address": null,
-      "total_households": null,
-      "supply_households": 32,
+      "supply_households": "22호",
       "type": null,
-      "house_type": "80.4㎡",
-      "elevator": false,
-      "parking": "64.32㎡"
+      "house_type": "17㎡, 35㎡",
+      "elevator": null,
+      "parking": null
     },
     {
-      "name": "인히어쌍문",
-      "address": null,
-      "total_households": 19,
-      "supply_households": 3,
-      "type": "청년",
-      "house_type": "26.92㎡",
-      "elevator": true,
-      "parking": "21.536㎡"
+      "name": null,
+      "address": "서울특별시 동작구 사당동 1044-1",
+      "district": "동작구",
+      "total_households": "528세대",
+      "supply_households": "3호",
+      "type": null,
+      "house_type": "37.92㎡",
+      "elevator": null,
+      "parking": null
+    },
+    {
+      "name": "골든노블레스",
+      "address": "서울특별시 동작구 대방동 403-14",
+      "district": "동작구",
+      "total_households": null,
+      "supply_households": "17호",
+      "type": null,
+      "house_type": "18㎡",
+      "elevator": null,
+      "parking": null
     }
   ]
 }

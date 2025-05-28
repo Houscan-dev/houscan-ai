@@ -14,8 +14,8 @@
   },
   "winner_announcement": null,
   "contract_period": {
-    "start": "2025.05.09",
-    "end": "2025.05.09"
+    "start": null,
+    "end": null
   },
   "payment_period": {
     "start": null,
