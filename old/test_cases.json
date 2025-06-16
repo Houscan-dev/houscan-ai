@@ -1,0 +1,86 @@
+{
+    "test_case_1": {
+        "user_data": {
+            "id": 1,
+            "age": 25,
+            "birth_date": "990315",
+            "gender": "F",
+            "university": true,
+            "graduate": false,
+            "employed": true,
+            "job_seeker": false,
+            "welfare_receipient": false,
+            "parents_own_house": false,
+            "disability_in_family": false,
+            "subscription_account": 2,
+            "total_assets": 280000000,
+            "car_value": 20000000,
+            "income_range": "70% 이하",
+            "create_at": "2025-04-12T21:42:35.736193+09:00",
+            "user": 1
+        }
+    },
+    "test_case_2": {
+        "user_data": {
+            "id": 2,
+            "age": 32,
+            "birth_date": "920510",
+            "gender": "M",
+            "university": false,
+            "graduate": true,
+            "employed": true,
+            "job_seeker": false,
+            "welfare_receipient": false,
+            "parents_own_house": true,
+            "disability_in_family": true,
+            "subscription_account": 1,
+            "total_assets": 320000000,
+            "car_value": 25000000,
+            "income_range": "100% 이하",
+            "create_at": "2025-04-12T22:15:40.736193+09:00",
+            "user": 2
+        }
+    },
+    "test_case_3": {
+        "user_data": {
+            "id": 3,
+            "age": 28,
+            "birth_date": "960723",
+            "gender": "F",
+            "university": true,
+            "graduate": false,
+            "employed": false,
+            "job_seeker": true,
+            "welfare_receipient": true,
+            "parents_own_house": false,
+            "disability_in_family": false,
+            "subscription_account": 4,
+            "total_assets": 150000000,
+            "car_value": 0,
+            "income_range": "50% 이하",
+            "create_at": "2025-04-13T10:30:22.736193+09:00",
+            "user": 3
+        }
+    },
+    "test_case_4": {
+        "user_data": {
+            "id": 4,
+            "age": 30,
+            "birth_date": "940825",
+            "gender": "M",
+            "university": false,
+            "graduate": false,
+            "employed": true,
+            "job_seeker": false,
+            "welfare_receipient": false,
+            "parents_own_house": false,
+            "disability_in_family": true,
+            "subscription_account": 2,
+            "total_assets": 200000000,
+            "car_value": 15000000,
+            "income_range": "80% 이하",
+            "create_at": "2025-04-13T14:20:15.736193+09:00",
+            "user": 4
+        }
+    }
+} 
