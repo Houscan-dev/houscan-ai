@@ -39,7 +39,8 @@
 - `test_chatbot.py`: 챗봇 테스트용 코드
 
 ### 5. 판단 로직
-- `housing_eligibility_analyzer.py`: 우선순위 및 신청자격 판단 로직
+- `housing_eligibility_analyzer_final.py`: 우선순위 및 신청자격 판단 로직(백엔드에서 작동 가능)
 
 ### 6. 기타
 - `old_extracted/`: 이전 버전의 정보 추출 결과 (현재 사용하지 않음)
+- `old/`: 현재 사용하지 않는 실험용 코드
